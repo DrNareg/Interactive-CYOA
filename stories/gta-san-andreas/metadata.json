@@ -1,0 +1,9 @@
+{
+  "id": "west-coast-legacy",
+  "title": "GTA San Andreas: Alternate Timelines",
+  "subtitle": "A state-sized gang war where loyalty is more expensive than bullets.",
+  "estimatedMinutes": 16,
+  "setting": "San Aurelio, 1992",
+  "version": "1.0",
+  "startingScene": "homecoming"
+}

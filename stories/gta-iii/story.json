@@ -1,0 +1,172 @@
+{
+  "id": "liberty-nightshift",
+  "title": "GTA III: Alternate Timelines",
+  "subtitle": "One quiet driver, three families, and a city that mistakes silence for weakness.",
+  "estimatedMinutes": 14,
+  "setting": "Liberty City, 2001",
+  "version": "1.0",
+  "startingScene": "arrival",
+  "achievements": [
+    { "id": "ghost_courier", "title": "Ghost Courier", "description": "Control Liberty while barely speaking a word.", "hidden": false },
+    { "id": "family_broker", "title": "Family Broker", "description": "Keep all families profitable for one night.", "hidden": true },
+    { "id": "bridge_burner", "title": "Bridge Burner", "description": "Start a citywide war and survive it.", "hidden": false },
+    { "id": "quiet_exit", "title": "Quiet Exit", "description": "Leave Liberty with clean papers and dirty memories.", "hidden": false }
+  ],
+  "scenes": {
+    "arrival": {
+      "id": "arrival",
+      "title": "Arrival in Rain",
+      "text": [
+        "A prison convoy gets interrupted by masked men and louder intentions. You are extracted, handed a pager, and informed your new career path has excellent growth opportunities and no dental plan.",
+        "Liberty is steel, rain, and resentment. Every alley has cameras, every camera has blind spots, and every blind spot has a business model.",
+        "Your handler says one sentence: work hard, ask nothing, and never trust a man with a family crest on his ring."
+      ],
+      "choices": [
+        { "id": "take_mafia_job", "label": "Run courier jobs for the old family", "next": "docks_pickup", "effects": { "reputation": 4, "sonny_trust": 6 }, "requires": [] },
+        { "id": "work_yardies", "label": "Take side work from uptown crews", "next": "uptown_signal", "effects": { "wealth": 6, "diaz_trust": 5 }, "requires": [] }
+      ]
+    },
+    "docks_pickup": {
+      "id": "docks_pickup",
+      "title": "Docks Pickup",
+      "text": [
+        "You collect a van full of electronics and one man who insists he is not nervous while chain-smoking his way through half the Atlantic.",
+        "Port unions, smugglers, and dock security all want a cut. Nobody agrees on percentages, but everyone agrees on ammunition.",
+        "The old family praises your efficiency in the tone of people evaluating furniture: useful, replaceable, and probably expensive."
+      ],
+      "choices": [
+        { "id": "deliver_clean", "label": "Deliver clean and build old-family trust", "next": "council_dinner", "effects": { "sonny_trust": 10, "wealth": 4 }, "requires": [] },
+        { "id": "skim_crates", "label": "Skim cargo and build your own stash", "next": "safehouse_ledger", "effects": { "wealth": 10, "reputation": -2 }, "requires": [] }
+      ]
+    },
+    "uptown_signal": {
+      "id": "uptown_signal",
+      "title": "Uptown Signal",
+      "text": [
+        "A rooftop meet turns into a dancehall summit where everyone smiles until the bass drops and negotiations become ballistic.",
+        "You keep the package moving through traffic that seems personally offended by your existence.",
+        "By dawn you have new contacts, a better gun, and six new reasons to distrust everybody with a startup mentality."
+      ],
+      "choices": [
+        { "id": "ally_uptown", "label": "Keep working uptown networks", "next": "safehouse_ledger", "effects": { "diaz_trust": 9, "reputation": 5 }, "requires": [] },
+        { "id": "flip_uptown", "label": "Sell uptown intel to the old family", "next": "council_dinner", "effects": { "sonny_trust": 8, "reputation": -4, "wealth": 5 }, "requires": [] }
+      ]
+    },
+    "safehouse_ledger": {
+      "id": "safehouse_ledger",
+      "title": "Safehouse Ledger",
+      "text": [
+        "You turn a condemned apartment into an operations room with radios, city maps, and takeout menus annotated like military doctrine.",
+        "A fixer explains Liberty economics: never own the violence, only invoice it.",
+        "You can play mediator, arsonist, or accountant with body armor."
+      ],
+      "choices": [
+        { "id": "broker_peace", "label": "Broker temporary peace between crews", "next": "council_dinner", "effects": { "reputation": 7, "police_heat": -3 }, "requires": [] },
+        { "id": "seed_conflict", "label": "Seed conflict and profit from chaos", "next": "bridge_lockdown", "effects": { "wealth": 8, "police_heat": 5, "empire_power": 6 }, "requires": [] }
+      ]
+    },
+    "council_dinner": {
+      "id": "council_dinner",
+      "title": "Council Dinner",
+      "text": [
+        "Three factions meet in a private club with velvet chairs, armed waiters, and a wine list that could fund a small insurgency.",
+        "You are asked to guarantee deliveries, settle debts, and decide which liar gets promoted.",
+        "The room calls this diplomacy. The morgue calls it preproduction."
+      ],
+      "choices": [
+        { "id": "back_old_family", "label": "Back the old family and centralize control", "next": "bridge_lockdown", "effects": { "sonny_trust": 12, "empire_power": 6 }, "requires": [] },
+        { "id": "build_triad", "label": "Balance all sides for a broker empire", "next": "bridge_lockdown", "effects": { "wealth": 9, "diaz_trust": 7, "reputation": 4 }, "requires": [] }
+      ]
+    },
+    "bridge_lockdown": {
+      "id": "bridge_lockdown",
+      "title": "Bridge Lockdown",
+      "text": [
+        "A downtown bombing closes the bridges. The city fragments into armed islands with toll booths.",
+        "Your pager will not stop buzzing. Every district wants extraction, ammo, and miracles by sunset.",
+        "You can hold lines and negotiate routes, or torch everything and own the aftermath."
+      ],
+      "choices": [
+        { "id": "organize_convoys", "label": "Organize protected convoys and tax movement", "next": "final_night", "effects": { "wealth": 10, "police_heat": -2, "empire_power": 6 }, "requires": [] },
+        { "id": "ignite_war", "label": "Trigger full war and wipe rivals", "next": "final_night", "effects": { "empire_power": 12, "police_heat": 10, "reputation": 6 }, "requires": [] },
+        { "id": "flee_bridges", "label": "Use forged papers and disappear", "next": "ending_quiet_exit", "effects": { "wealth": 6, "reputation": -6 }, "requires": [
+          { "variable": "wealth", "operator": ">=", "value": 14 }
+        ] }
+      ]
+    },
+    "final_night": {
+      "id": "final_night",
+      "title": "Final Nightshift",
+      "text": [
+        "Under neon rain and police sirens, your empire either coheres or combusts.",
+        "All old debts come due at once. Family bosses call you son, traitor, and savior in the same voicemail.",
+        "By sunrise Liberty will have one logistics king, one uneasy coalition, or one large cautionary tale."
+      ],
+      "choices": [
+        { "id": "take_city", "label": "Take command and run Liberty like a private utility", "next": "ending_ghost_courier", "effects": { "empire_power": 15, "reputation": 8 }, "requires": [] },
+        { "id": "hold_balance", "label": "Hold the coalition and profit quietly", "next": "ending_family_broker", "effects": { "wealth": 10, "sonny_trust": 8, "diaz_trust": 8 }, "requires": [] },
+        { "id": "burn_bridges", "label": "Burn every bridge and rule the ashes", "next": "ending_bridge_burner", "effects": { "police_heat": 14, "empire_power": 8 }, "requires": [] }
+      ]
+    },
+    "ending_ghost_courier": {
+      "id": "ending_ghost_courier",
+      "type": "ending",
+      "title": "Ghost Courier",
+      "text": [
+        "You become the most feared name in city logistics: no speeches, no interviews, just perfect deliveries and terrible consequences.",
+        "Liberty runs because your schedule says it does."
+      ],
+      "ending": {
+        "title": "Ghost Courier",
+        "summary": "You take total control of Liberty's criminal supply lines.",
+        "status": { "You": "Alive", "Old Family": "Subordinate", "City": "Operational", "Police": "Outplayed" },
+        "achievement": "ghost_courier"
+      }
+    },
+    "ending_family_broker": {
+      "id": "ending_family_broker",
+      "type": "ending",
+      "title": "Family Broker",
+      "text": [
+        "You keep all factions rich enough to behave and poor enough to need you.",
+        "Nobody loves you, which in this city is the closest thing to peace."
+      ],
+      "ending": {
+        "title": "Family Broker",
+        "summary": "You build a profitable balance between rival syndicates.",
+        "status": { "You": "Alive", "Families": "Coexisting", "Profits": "High", "Violence": "Managed" },
+        "achievement": "family_broker"
+      }
+    },
+    "ending_bridge_burner": {
+      "id": "ending_bridge_burner",
+      "type": "ending",
+      "title": "Bridge Burner",
+      "text": [
+        "You win the war and lose the city. Districts burn, rivals die, and every bridge becomes a checkpoint with your initials on it.",
+        "The newspapers call it a tragedy. Your crew calls it market consolidation."
+      ],
+      "ending": {
+        "title": "Bridge Burner",
+        "summary": "You survive a citywide war and rule a battered Liberty.",
+        "status": { "You": "Alive", "Families": "Broken", "City": "Militarized", "Heat": "Extreme" },
+        "achievement": "bridge_burner"
+      }
+    },
+    "ending_quiet_exit": {
+      "id": "ending_quiet_exit",
+      "type": "ending",
+      "title": "Quiet Exit",
+      "text": [
+        "You leave Liberty at dawn with forged documents, clean shoes, and absolutely no intention of answering unknown numbers ever again.",
+        "The city keeps moving, offended that you escaped politely."
+      ],
+      "ending": {
+        "title": "Quiet Exit",
+        "summary": "You walk away before the final war consumes everyone.",
+        "status": { "You": "Missing", "Families": "Still Fighting", "City": "Unresolved" },
+        "achievement": "quiet_exit"
+      }
+    }
+  }
+}

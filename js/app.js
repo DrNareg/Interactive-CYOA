@@ -1,4 +1,4 @@
-import { loadStoryRegistry, loadStoryPack } from './story-loader.js';
+import { loadStoryRegistry, loadStoryPack, loadStoryMetadata } from './story-loader.js';
 import {
   createInitialState,
   evaluateCondition,
@@ -19,6 +19,7 @@ const app = {
   currentStory: null,
   currentState: null,
   storyProgress: { stories: {} },
+  storyMetadata: [],
   achievements: [],
   ui: {
     audioReady: false,
@@ -618,19 +619,23 @@ function setupBackgroundMusic() {
 
 function renderStorySelect() {
   const screen = activateScreen('story-select-screen');
+  const storyCards = (app.storyMetadata || []).map((storyMeta) => `
+    <article class="story-card">
+      <h3>${storyMeta.title || storyMeta.id}</h3>
+      <p>${storyMeta.subtitle || 'Choose your path and shape the timeline.'}</p>
+      <p>${storyMeta.estimatedMinutes || 8}-${Math.max((storyMeta.estimatedMinutes || 8) + 2, 10)} minutes • ${storyMeta.setting || 'Story Pack'}</p>
+      <button class="story-button" data-story="${storyMeta.id}">Play</button>
+    </article>
+  `).join('');
+
   screen.innerHTML = `
     <div class="story-hero">
       <h1>Choose Your Timeline</h1>
-      <div class="story-meta">Multiple stories • replayable outcomes</div>
+      <div class="story-meta">${app.storyMetadata.length || 0} stories • replayable outcomes</div>
     </div>
     <div class="story-body">
       <div class="story-grid">
-        <article class="story-card">
-          <h3>Vice City: Alternate Timelines</h3>
-          <p>What if Tommy chose differently?</p>
-          <p>5–10 minutes • Vice City, 1986</p>
-          <button class="story-button" data-story="vice-city">Play</button>
-        </article>
+        ${storyCards || '<div class="empty-state">No stories found in registry.</div>'}
       </div>
     </div>
   `;
@@ -652,7 +657,7 @@ function renderIntro(story) {
     <div class="story-body">
       <div class="summary-card">
         <h2>${story.subtitle || 'A dangerous new timeline'}</h2>
-        <p>One deal is about to change everything. Your decisions will determine who rises, who falls, and who owns the city.</p>
+        <p>One decision can fracture the entire timeline. Your choices determine who rises, who falls, and who tells the story afterward.</p>
         <p><strong>Estimated time:</strong> ${story.estimatedMinutes || 8} minutes</p>
         <p><strong>Multiple endings.</strong> Your decisions matter.</p>
         <button class="primary-button" id="begin-story-btn">Begin</button>
@@ -913,6 +918,15 @@ async function initializeApp() {
 
   app.storyProgress = loadProgress();
   app.registry = await loadStoryRegistry();
+  app.storyMetadata = (await Promise.all(
+    app.registry.map(async (storyId) => {
+      try {
+        return await loadStoryMetadata(storyId);
+      } catch (error) {
+        return null;
+      }
+    })
+  )).filter(Boolean);
   renderStorySelect();
   showStorySelect();
 }

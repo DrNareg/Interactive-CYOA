@@ -1,0 +1,172 @@
+{
+  "id": "immigrant-code",
+  "title": "GTA IV: Alternate Timelines",
+  "subtitle": "The old country follows you to the new one, usually armed.",
+  "estimatedMinutes": 16,
+  "setting": "Liberty City, 2008",
+  "version": "1.0",
+  "startingScene": "boat_in",
+  "achievements": [
+    { "id": "city_made", "title": "City Made", "description": "Build your own syndicate in Liberty.", "hidden": false },
+    { "id": "cousin_keeper", "title": "Cousin Keeper", "description": "Keep family alive through the final conflict.", "hidden": false },
+    { "id": "old_world_ghost", "title": "Old World Ghost", "description": "Erase your past with federal help.", "hidden": true },
+    { "id": "american_dream", "title": "American Dream", "description": "Leave crime and build a legal life.", "hidden": false }
+  ],
+  "scenes": {
+    "boat_in": {
+      "id": "boat_in",
+      "title": "Boat In",
+      "text": [
+        "You arrive in Liberty expecting bright lights, easy money, and maybe one honest taxi. You get gray skies, debt collectors, and a cousin with entrepreneurial delusions.",
+        "He says this is the land of opportunity. By opportunity, he means owing money to men who pronounce your name like a threat.",
+        "The old country war is behind you, but its phone calls are not."
+      ],
+      "choices": [
+        { "id": "help_cousin", "label": "Help your cousin stabilize his business", "next": "broker_hustle", "effects": { "lance_loyalty": 10, "wealth": 2 }, "requires": [] },
+        { "id": "chase_collectors", "label": "Go after the debt collectors directly", "next": "collector_night", "effects": { "reputation": 6, "police_heat": 4 }, "requires": [] }
+      ]
+    },
+    "broker_hustle": {
+      "id": "broker_hustle",
+      "title": "Broker Hustle",
+      "text": [
+        "You spend nights driving fares, days dodging gang enforcers, and afternoons pretending the check-engine light is optional.",
+        "Your cousin flirts with danger and women in equal amounts, with approximately the same success rate.",
+        "A local loan shark offers a truce if you run one dirty favor that is definitely not one dirty favor."
+      ],
+      "choices": [
+        { "id": "run_favor", "label": "Run the favor and buy time", "next": "collector_night", "effects": { "wealth": 6, "sonny_trust": 5 }, "requires": [] },
+        { "id": "reject_favor", "label": "Reject and build your own leverage", "next": "dock_job", "effects": { "reputation": 8, "police_heat": 3 }, "requires": [] }
+      ]
+    },
+    "collector_night": {
+      "id": "collector_night",
+      "title": "Collector Night",
+      "text": [
+        "You hunt debt collectors through rain-soaked projects and find out quickly that all of them are employees, not owners.",
+        "The boss behind them has old-country contacts and new-world lawyers. A dangerous combination.",
+        "He offers a deal: do jobs for him and your family debt shrinks. Refuse and your family tree loses branches."
+      ],
+      "choices": [
+        { "id": "take_contracts", "label": "Take contracts and infiltrate his network", "next": "dock_job", "effects": { "sonny_trust": 8, "wealth": 5 }, "requires": [] },
+        { "id": "retaliate", "label": "Retaliate publicly and force a reputation war", "next": "nightclub_meet", "effects": { "reputation": 10, "police_heat": 7 }, "requires": [] }
+      ]
+    },
+    "dock_job": {
+      "id": "dock_job",
+      "title": "Dock Job",
+      "text": [
+        "At the docks, container cranes move slower than betrayal but with similar precision.",
+        "You intercept contraband linked to war profiteers from your homeland. Faces from your past reappear with expensive coats and cheap morality.",
+        "Now the question is simple: profit with monsters, or betray them before they betray you."
+      ],
+      "choices": [
+        { "id": "profit_first", "label": "Profit first and stay inside their machine", "next": "nightclub_meet", "effects": { "wealth": 9, "diaz_trust": 6 }, "requires": [] },
+        { "id": "burn_contacts", "label": "Burn old contacts and protect your family", "next": "nightclub_meet", "effects": { "lance_loyalty": 8, "reputation": 6 }, "requires": [] }
+      ]
+    },
+    "nightclub_meet": {
+      "id": "nightclub_meet",
+      "title": "Nightclub Meet",
+      "text": [
+        "A nightclub owner with political donors and paramilitary bodyguards invites you upstairs for champagne and coercion.",
+        "He needs someone reliable to mediate between Balkan crews, street gangs, and white-collar thieves in suits worth more than your first apartment.",
+        "You can become his trusted operator, his replacement, or his biggest mistake."
+      ],
+      "choices": [
+        { "id": "be_operator", "label": "Become his operator and scale quietly", "next": "agency_offer", "effects": { "wealth": 10, "sonny_trust": 7 }, "requires": [] },
+        { "id": "undermine_owner", "label": "Undermine him and prepare a takeover", "next": "agency_offer", "effects": { "empire_power": 9, "reputation": 7, "police_heat": 4 }, "requires": [] }
+      ]
+    },
+    "agency_offer": {
+      "id": "agency_offer",
+      "title": "Agency Offer",
+      "text": [
+        "Federal agents corner you with files, photos, and the kind of smile that says they already know the answer.",
+        "They offer witness protection, debt forgiveness, and one very fake new identity if you feed them names.",
+        "Your cousin says never trust them. Your survival instinct says trust is not the point."
+      ],
+      "choices": [
+        { "id": "feed_feds", "label": "Feed the feds selectively and play both sides", "next": "final_reckoning", "effects": { "sonny_trust": 10, "police_heat": -6, "reputation": -4 }, "requires": [] },
+        { "id": "refuse_feds", "label": "Refuse and settle it your own way", "next": "final_reckoning", "effects": { "reputation": 9, "police_heat": 8, "empire_power": 7 }, "requires": [] },
+        { "id": "take_new_name", "label": "Take full witness relocation now", "next": "ending_old_world_ghost", "effects": { "sonny_trust": 14, "reputation": -10 }, "requires": [
+          { "variable": "police_heat", "operator": ">=", "value": 8 }
+        ] }
+      ]
+    },
+    "final_reckoning": {
+      "id": "final_reckoning",
+      "title": "Final Reckoning",
+      "text": [
+        "Everything converges at once: old-country killers, new-world investors, and politicians who insist they have never met you while calling your burner phone.",
+        "Your family needs protection, your crew needs direction, and your enemies need graves or paychecks.",
+        "Liberty offers no happy endings, only expensive compromises."
+      ],
+      "choices": [
+        { "id": "build_syndicate", "label": "Take over operations and build your own syndicate", "next": "ending_city_made", "effects": { "empire_power": 14, "wealth": 10 }, "requires": [] },
+        { "id": "save_family", "label": "Prioritize family extraction over empire", "next": "ending_cousin_keeper", "effects": { "lance_loyalty": 14, "wealth": 4 }, "requires": [] },
+        { "id": "go_legit", "label": "Cash out and start legal life", "next": "ending_american_dream", "effects": { "wealth": 12, "police_heat": -8 }, "requires": [] }
+      ]
+    },
+    "ending_city_made": {
+      "id": "ending_city_made",
+      "type": "ending",
+      "title": "City Made",
+      "text": [
+        "You outlast everyone and turn Liberty's underworld into a disciplined business empire.",
+        "The city still hates you, but now it does so on your schedule."
+      ],
+      "ending": {
+        "title": "City Made",
+        "summary": "You become a top-tier power broker in Liberty City.",
+        "status": { "You": "Alive", "Family": "Protected", "Rivals": "Subordinate", "Feds": "Watching" },
+        "achievement": "city_made"
+      }
+    },
+    "ending_cousin_keeper": {
+      "id": "ending_cousin_keeper",
+      "type": "ending",
+      "title": "Cousin Keeper",
+      "text": [
+        "You abandon maximum profit to get your people out alive.",
+        "Your cousin still talks too much, still drives too fast, and still calls you a hero at least twice a day."
+      ],
+      "ending": {
+        "title": "Cousin Keeper",
+        "summary": "You protect family and survive, even if the empire stays smaller.",
+        "status": { "You": "Alive", "Family": "Alive", "Empire": "Modest", "Conscience": "Functional" },
+        "achievement": "cousin_keeper"
+      }
+    },
+    "ending_old_world_ghost": {
+      "id": "ending_old_world_ghost",
+      "type": "ending",
+      "title": "Old World Ghost",
+      "text": [
+        "You disappear into witness relocation where your new job is pretending your past was a long administrative misunderstanding.",
+        "No one can find you. Not your enemies, not your friends, not even your own reflection some mornings."
+      ],
+      "ending": {
+        "title": "Old World Ghost",
+        "summary": "You erase your criminal identity in exchange for survival.",
+        "status": { "You": "Missing", "Family": "Distant", "Rivals": "Confused", "Federal Program": "Active" },
+        "achievement": "old_world_ghost"
+      }
+    },
+    "ending_american_dream": {
+      "id": "ending_american_dream",
+      "type": "ending",
+      "title": "American Dream",
+      "text": [
+        "You buy a legal business, pay taxes through clenched teeth, and discover that paperwork can be scarier than gunfire.",
+        "It is not glamorous, but it is yours."
+      ],
+      "ending": {
+        "title": "American Dream",
+        "summary": "You leave organized crime and build a legitimate life.",
+        "status": { "You": "Alive", "Family": "Stable", "Empire": "Retired", "Future": "Open" },
+        "achievement": "american_dream"
+      }
+    }
+  }
+}

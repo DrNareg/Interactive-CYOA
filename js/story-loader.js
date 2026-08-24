@@ -29,6 +29,15 @@ export async function loadStoryPack(id) {
   return { metadata, story };
 }
 
+export async function loadStoryMetadata(id) {
+  const metadataUrl = `stories/${id}/metadata.json`;
+  const response = await fetch(metadataUrl, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`Unable to load story metadata: ${id}`);
+  }
+  return response.json();
+}
+
 export function parseChoiceText(text = '') {
   return text
     .split(/\n+/)

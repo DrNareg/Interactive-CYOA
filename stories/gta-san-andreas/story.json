@@ -1,0 +1,218 @@
+{
+  "id": "west-coast-legacy",
+  "title": "GTA San Andreas: Alternate Timelines",
+  "subtitle": "A state-sized gang war where loyalty is more expensive than bullets.",
+  "estimatedMinutes": 16,
+  "setting": "San Aurelio, 1992",
+  "version": "1.0",
+  "startingScene": "homecoming",
+  "achievements": [
+    { "id": "avenue_king", "title": "Avenue King", "description": "Take the whole state block by block.", "hidden": false },
+    { "id": "family_first", "title": "Family First", "description": "Win by keeping your original crew together.", "hidden": false },
+    { "id": "casino_phantom", "title": "Casino Phantom", "description": "Use Venturas money to buy peace.", "hidden": true },
+    { "id": "witness_deal", "title": "Witness Deal", "description": "Trade the war for federal survival.", "hidden": true },
+    { "id": "dust_runner", "title": "Dust Runner", "description": "Leave with cash before the state buries you.", "hidden": false }
+  ],
+  "scenes": {
+    "homecoming": {
+      "id": "homecoming",
+      "title": "Welcome Back to Ganton Heights",
+      "text": [
+        "You come home to a neighborhood that still remembers your name and has already used it in three arguments this morning.",
+        "The corner store has bars on the windows, fresh graffiti on the shutters, and a clerk who asks if you want cigarettes, lottery tickets, or plausible deniability.",
+        "Your old set says the city changed while you were gone. Translation: everyone got greedier, the cops got louder, and the funerals got better catering.",
+        "A police chopper circles overhead like it is reading subtitles for your life. Welcome home."
+      ],
+      "choices": [
+        { "id": "visit_mom", "label": "Start with family and gather street truth", "next": "old_friends", "effects": { "lance_loyalty": 8, "reputation": 4 }, "requires": [] },
+        { "id": "grab_rifle", "label": "Arm up and hit rival corners immediately", "next": "neighborhood_fire", "effects": { "empire_power": 8, "police_heat": 6 }, "requires": [] },
+        { "id": "call_lawyer", "label": "Call a fixer and map the legal battlefield", "next": "badge_or_street", "effects": { "wealth": -4, "sonny_trust": 4 }, "requires": [] }
+      ]
+    },
+    "old_friends": {
+      "id": "old_friends",
+      "title": "Old Friends, New Prices",
+      "text": [
+        "Your childhood crew meets you at a backyard barbecue where half the guests are armed and the other half are pretending they are not.",
+        "Big Smoke-style talkers promise empire, gym-rat lieutenants promise discipline, and one cousin promises to stop gambling after just one more horse race. Nobody believes him.",
+        "The table goes quiet when someone asks whether you want respect, revenge, or retirement. In this state you only get to pick two."
+      ],
+      "choices": [
+        { "id": "rebuild_block", "label": "Rebuild neighborhood protection first", "next": "neighborhood_fire", "effects": { "lance_loyalty": 10, "reputation": 6 }, "requires": [] },
+        { "id": "chase_big_money", "label": "Skip small wars and chase Venturas cash", "next": "casino_tables", "effects": { "wealth": 10, "reputation": -2 }, "requires": [] }
+      ]
+    },
+    "neighborhood_fire": {
+      "id": "neighborhood_fire",
+      "title": "Neighborhood on Fire",
+      "text": [
+        "Two blocks flip in one night, three in the morning, and by lunchtime a radio host calls you a civic revitalization program with assault rifles.",
+        "Rivals push back hard. You win the streets but lose sleep, patience, and one very expensive lowrider.",
+        "Kids cheer your name while grandmothers curse your tactics from porch chairs that have seen five generations of bad decisions.",
+        "You can escalate, negotiate, or pivot to bigger games before the city writes your obituary in advance."
+      ],
+      "choices": [
+        { "id": "open_desert_route", "label": "Open desert gun-running routes", "next": "desert_run", "effects": { "empire_power": 7, "police_heat": 4 }, "requires": [] },
+        { "id": "sit_with_mayor", "label": "Take a meeting with city hall intermediaries", "next": "city_hall_deal", "effects": { "sonny_trust": 6, "wealth": -3 }, "requires": [] }
+      ]
+    },
+    "badge_or_street": {
+      "id": "badge_or_street",
+      "title": "Badge or Street",
+      "text": [
+        "A narcotics detective with polished shoes and filthy morals offers a simple arrangement: feed him selective rivals and he feeds you selective freedom.",
+        "He smiles like a used-car salesman who just discovered extortion. You hate him instantly, which in this city is usually the beginning of a profitable partnership.",
+        "Your crew wants blood, not paperwork, but blood tends to come with helicopters and headlines."
+      ],
+      "choices": [
+        { "id": "play_cop", "label": "Play the detective and weaponize his badge", "next": "city_hall_deal", "effects": { "sonny_trust": 10, "police_heat": -4 }, "requires": [] },
+        { "id": "reject_cop", "label": "Reject the badge and build pure street power", "next": "desert_run", "effects": { "reputation": 8, "police_heat": 5 }, "requires": [] }
+      ]
+    },
+    "desert_run": {
+      "id": "desert_run",
+      "title": "Desert Run",
+      "text": [
+        "Out past the city limits, the desert is all dust, biker compounds, and conspiracy radio channels explaining how pigeons are government equipment.",
+        "You broker ammo with meth bikers who call everyone brother and still check your pockets before hugging you.",
+        "One bad deal can get you buried where tumbleweeds do the witness statements, but one good deal can arm an entire county.",
+        "The bikers demand either fear or respect. Unfortunately both are sold as separate packages."
+      ],
+      "choices": [
+        { "id": "buy_respect", "label": "Pay fair and earn biker respect", "next": "biker_treaty", "effects": { "lance_loyalty": 5, "wealth": -6, "empire_power": 6 }, "requires": [] },
+        { "id": "steal_cache", "label": "Steal their cache and outrun consequences", "next": "biker_treaty", "effects": { "empire_power": 11, "police_heat": 7, "reputation": 4 }, "requires": [] }
+      ]
+    },
+    "casino_tables": {
+      "id": "casino_tables",
+      "title": "Venturas Tables",
+      "text": [
+        "Venturas glows like a tax write-off for sin itself. Slot machines scream, whales gamble, and every casino owner pretends organized crime is an urban legend with valet service.",
+        "You make alliances with card dealers, pit bosses, and one magician who definitely launders money between rabbit tricks.",
+        "By midnight your operation has clean income, dirty enemies, and a stack of chips that smells like victory and stale smoke."
+      ],
+      "choices": [
+        { "id": "buy_politicians", "label": "Use casino cash to buy city hall leverage", "next": "city_hall_deal", "effects": { "wealth": 12, "sonny_trust": 8 }, "requires": [] },
+        { "id": "fund_streets", "label": "Move profits back into neighborhood muscle", "next": "biker_treaty", "effects": { "empire_power": 10, "lance_loyalty": 6 }, "requires": [] }
+      ]
+    },
+    "biker_treaty": {
+      "id": "biker_treaty",
+      "title": "Biker Treaty",
+      "text": [
+        "The desert clubhouse summit includes burnt coffee, loaded shotguns, and a handwritten peace treaty on the back of a monster truck flyer.",
+        "Your lieutenant says trust no one. The biker boss says trust everyone. Both men are lying in different accents.",
+        "If you unify these maniacs, the whole state opens. If you insult them, your convoy becomes a bonfire with ambitions."
+      ],
+      "choices": [
+        { "id": "state_alliance", "label": "Forge the alliance and combine forces", "next": "final_turf_war", "effects": { "empire_power": 12, "lance_loyalty": 8 }, "requires": [] },
+        { "id": "sell_out_treaty", "label": "Sell treaty intel to city hall", "next": "city_hall_deal", "effects": { "sonny_trust": 10, "reputation": -4, "wealth": 6 }, "requires": [] }
+      ]
+    },
+    "city_hall_deal": {
+      "id": "city_hall_deal",
+      "title": "City Hall Deal",
+      "text": [
+        "Behind polished doors, elected officials discuss ethics the way mechanics discuss ballet: politely and with zero intention of participating.",
+        "They offer contracts, zoning advantages, and quiet immunity if you keep the violence photogenic and mostly off downtown streets.",
+        "Your crew hates this. The accountants love it. History says accountants usually win in the long run, but history has terrible taste."
+      ],
+      "choices": [
+        { "id": "sign_deal", "label": "Sign and become the legal-looking power", "next": "final_turf_war", "effects": { "sonny_trust": 12, "wealth": 8, "police_heat": -6 }, "requires": [] },
+        { "id": "burn_deal", "label": "Burn the deal and declare open war", "next": "final_turf_war", "effects": { "reputation": 10, "empire_power": 8, "police_heat": 8 }, "requires": [] },
+        { "id": "federal_flip", "label": "Take a secret federal immunity deal", "next": "ending_federal_pawn", "effects": { "sonny_trust": 14, "reputation": -12 }, "requires": [
+          { "variable": "police_heat", "operator": ">=", "value": 8 }
+        ] }
+      ]
+    },
+    "final_turf_war": {
+      "id": "final_turf_war",
+      "title": "Statewide Turf War",
+      "text": [
+        "The final week is chaos with branding: freeway ambushes, courtroom stunts, and neighborhood rallies that look like political campaigns sponsored by body armor.",
+        "Everyone wants your crown, your contracts, or your funeral plot. Sometimes all three.",
+        "You can rule through fear, rule through family, cash out before the storm, or let the whole empire collapse under its own ego."
+      ],
+      "choices": [
+        { "id": "claim_crown", "label": "Take every district by force and claim the crown", "next": "ending_avenue_king", "effects": { "empire_power": 14, "reputation": 8 }, "requires": [] },
+        { "id": "protect_family", "label": "Defend your core crew and hold fewer but loyal blocks", "next": "ending_family_first", "effects": { "lance_loyalty": 14, "empire_power": 6 }, "requires": [] },
+        { "id": "casino_exit", "label": "Liquidate assets and vanish through Venturas", "next": "ending_dust_runner", "effects": { "wealth": 16, "police_heat": -4 }, "requires": [] },
+        { "id": "self_destruct", "label": "Overextend into every enemy front at once", "next": "ending_ashes_of_avenue", "effects": { "empire_power": -16, "police_heat": 12 }, "requires": [] }
+      ]
+    },
+    "ending_avenue_king": {
+      "id": "ending_avenue_king",
+      "type": "ending",
+      "title": "Avenue King",
+      "text": [
+        "You own the map, the ports, and the panic. The state runs on your schedule now.",
+        "The victory parade is unofficial, heavily armed, and somehow still better organized than local government."
+      ],
+      "ending": {
+        "title": "Avenue King",
+        "summary": "You conquer San Aurelio and build an empire too big to ignore.",
+        "status": { "You": "Alive", "Core Crew": "Alive", "City Hall": "Compromised", "State": "Owned" },
+        "achievement": "avenue_king"
+      }
+    },
+    "ending_family_first": {
+      "id": "ending_family_first",
+      "type": "ending",
+      "title": "Family First",
+      "text": [
+        "You keep fewer districts, but the ones you hold are loyal and profitable.",
+        "Nobody calls you a king. They call you something rarer in this business: trustworthy."
+      ],
+      "ending": {
+        "title": "Family First",
+        "summary": "You win without sacrificing your people for one more zip code.",
+        "status": { "You": "Alive", "Core Crew": "Loyal", "Empire": "Stable", "Rivals": "Contained" },
+        "achievement": "family_first"
+      }
+    },
+    "ending_federal_pawn": {
+      "id": "ending_federal_pawn",
+      "type": "ending",
+      "title": "Federal Pawn",
+      "text": [
+        "The immunity deal keeps your heartbeat steady and your conscience unemployed.",
+        "You survive, testify, and watch your old world burn from behind very expensive government curtains."
+      ],
+      "ending": {
+        "title": "Federal Pawn",
+        "summary": "You trade the street throne for protection and paperwork.",
+        "status": { "You": "Alive", "Core Crew": "Betrayed", "Federal Taskforce": "Satisfied", "Reputation": "Ruined" },
+        "achievement": "witness_deal"
+      }
+    },
+    "ending_dust_runner": {
+      "id": "ending_dust_runner",
+      "type": "ending",
+      "title": "Dust Runner",
+      "text": [
+        "You cash out before anyone can pin you down. By sunrise, the state only has rumors and unpaid parking tickets.",
+        "Some call it cowardice. Your offshore account calls it excellent decision-making."
+      ],
+      "ending": {
+        "title": "Dust Runner",
+        "summary": "You disappear rich while everyone else keeps fighting over your old corners.",
+        "status": { "You": "Missing", "Empire": "Fragmented", "Rivals": "Fighting", "Bank Account": "Very Alive" },
+        "achievement": "dust_runner"
+      }
+    },
+    "ending_ashes_of_avenue": {
+      "id": "ending_ashes_of_avenue",
+      "type": "ending",
+      "title": "Ashes of the Avenue",
+      "text": [
+        "You try to hold every street at once and lose all of them in a week of sirens and smoke.",
+        "The city survives. Your legacy does not."
+      ],
+      "ending": {
+        "title": "Ashes of the Avenue",
+        "summary": "Greed outruns strategy and the empire implodes.",
+        "status": { "You": "Unknown", "Core Crew": "Scattered", "Empire": "Collapsed", "City": "Still Corrupt" }
+      }
+    }
+  }
+}

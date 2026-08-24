@@ -1,0 +1,173 @@
+{
+  "id": "triple-switch",
+  "title": "GTA V: Alternate Timelines",
+  "subtitle": "Three criminals, one sunny city, and enough ego to crash the economy twice.",
+  "estimatedMinutes": 15,
+  "setting": "Sunfall County, 2013",
+  "version": "1.0",
+  "startingScene": "failed_score",
+  "achievements": [
+    { "id": "perfect_crew", "title": "Perfect Crew", "description": "Keep all three leads alive and rich.", "hidden": false },
+    { "id": "market_crash", "title": "Market Crash", "description": "Win by breaking the financial elite.", "hidden": true },
+    { "id": "sunset_king", "title": "Sunset King", "description": "Take over Sunfall's criminal economy.", "hidden": false },
+    { "id": "retirement_plan", "title": "Retirement Plan", "description": "Walk away before the next betrayal.", "hidden": false }
+  ],
+  "scenes": {
+    "failed_score": {
+      "id": "failed_score",
+      "title": "Failed Score",
+      "text": [
+        "A small payroll robbery turns into a freeway war because one crew member brought the wrong van and another brought feelings.",
+        "Now all three of you are connected by debt, leverage, and the mutual understanding that none of you should ever make a calendar together.",
+        "Sunfall County shines in postcard colors while your life catches fire in real time."
+      ],
+      "choices": [
+        { "id": "trust_veteran", "label": "Let the veteran planner call the next move", "next": "safehouse_split", "effects": { "sonny_trust": 8, "empire_power": 4 }, "requires": [] },
+        { "id": "trust_hustler", "label": "Let the young hustler chase high-risk opportunities", "next": "street_wave", "effects": { "reputation": 8, "wealth": 4 }, "requires": [] },
+        { "id": "trust_chaos", "label": "Let the wildcard escalate immediately", "next": "desert_madness", "effects": { "police_heat": 8, "empire_power": 6 }, "requires": [] }
+      ]
+    },
+    "safehouse_split": {
+      "id": "safehouse_split",
+      "title": "Safehouse Split",
+      "text": [
+        "In a mansion borrowed from people currently very upset with you, the crew debates strategy over stolen wine and poor communication.",
+        "The veteran wants structure, the hustler wants momentum, and the wildcard wants to buy a tank online.",
+        "You need money fast and trust faster. One of those is harder to counterfeit."
+      ],
+      "choices": [
+        { "id": "prep_heist", "label": "Plan a disciplined jewelry district heist", "next": "corporate_angles", "effects": { "wealth": 8, "sonny_trust": 6 }, "requires": [] },
+        { "id": "street_flips", "label": "Fund operations through street flips", "next": "street_wave", "effects": { "reputation": 7, "empire_power": 5 }, "requires": [] }
+      ]
+    },
+    "street_wave": {
+      "id": "street_wave",
+      "title": "Street Wave",
+      "text": [
+        "You hit armored vans, influencer mansions, and one cryptocurrency startup whose security password was literally password.",
+        "Cash flows in, law enforcement closes in, and the crew starts scoring points in the ancient sport of blaming each other.",
+        "A fixer offers bigger work tied to corporate sabotage and political donors."
+      ],
+      "choices": [
+        { "id": "take_fixer_jobs", "label": "Take fixer contracts and go upscale", "next": "corporate_angles", "effects": { "wealth": 10, "police_heat": 4 }, "requires": [] },
+        { "id": "go_loud", "label": "Go loud and build fear-based control", "next": "desert_madness", "effects": { "reputation": 10, "police_heat": 8 }, "requires": [] }
+      ]
+    },
+    "desert_madness": {
+      "id": "desert_madness",
+      "title": "Desert Madness",
+      "text": [
+        "Out in the county desert, private militias and paranoid entrepreneurs sell heavy equipment with loyalty programs and no refunds.",
+        "The wildcard thrives, the veteran drinks in silence, and the hustler checks real estate listings between firefights.",
+        "You secure military-grade toys and military-grade headaches."
+      ],
+      "choices": [
+        { "id": "weaponize", "label": "Weaponize for a city takeover", "next": "corporate_angles", "effects": { "empire_power": 10, "police_heat": 6 }, "requires": [] },
+        { "id": "sell_hardware", "label": "Sell hardware to rivals for liquidity", "next": "corporate_angles", "effects": { "wealth": 12, "reputation": -3 }, "requires": [] }
+      ]
+    },
+    "corporate_angles": {
+      "id": "corporate_angles",
+      "title": "Corporate Angles",
+      "text": [
+        "A tech billionaire and a media baron are quietly funding opposite sides of the same city contract war.",
+        "They both hire you through shell companies, assuming criminals cannot read spreadsheets. They are wrong, and their accountants should panic.",
+        "Now you can play kingmaker, burn both, or cut your own route to the central bank vault."
+      ],
+      "choices": [
+        { "id": "play_elites", "label": "Play both elites and inflate your cut", "next": "federal_pressure", "effects": { "wealth": 12, "sonny_trust": 6, "diaz_trust": 6 }, "requires": [] },
+        { "id": "burn_elites", "label": "Leak their secrets and weaponize public rage", "next": "federal_pressure", "effects": { "reputation": 10, "police_heat": 5 }, "requires": [] }
+      ]
+    },
+    "federal_pressure": {
+      "id": "federal_pressure",
+      "title": "Federal Pressure",
+      "text": [
+        "A federal task force arrives with drones, subpoenas, and enough ego to power the western grid.",
+        "They offer immunity for one crew member if the other two become historical footnotes.",
+        "The crew has reached the trust exercise phase, which in your line of work means checking who loaded extra magazines."
+      ],
+      "choices": [
+        { "id": "crew_unity", "label": "Reject the offer and keep the crew unified", "next": "sunfall_endgame", "effects": { "lance_loyalty": 12, "empire_power": 8 }, "requires": [] },
+        { "id": "flip_one", "label": "Secretly flip one member for legal cover", "next": "sunfall_endgame", "effects": { "sonny_trust": 10, "reputation": -8, "police_heat": -4 }, "requires": [] },
+        { "id": "retire_now", "label": "Cash out and disappear before endgame", "next": "ending_retirement_plan", "effects": { "wealth": 14, "police_heat": -6 }, "requires": [
+          { "variable": "wealth", "operator": ">=", "value": 16 }
+        ] }
+      ]
+    },
+    "sunfall_endgame": {
+      "id": "sunfall_endgame",
+      "title": "Sunfall Endgame",
+      "text": [
+        "The final operation targets money, power, and narrative control: city data centers, elite bank routes, and televised scandal releases all in one night.",
+        "Your crew can walk out as legends, corpses, or consultants on a federal slide deck.",
+        "The sun rises over helicopters, influencer livestreams, and one very confused stock market."
+      ],
+      "choices": [
+        { "id": "crew_wins", "label": "Keep the crew alive and split everything", "next": "ending_perfect_crew", "effects": { "lance_loyalty": 16, "wealth": 10 }, "requires": [] },
+        { "id": "city_takeover", "label": "Centralize power and dominate Sunfall", "next": "ending_sunset_king", "effects": { "empire_power": 14, "reputation": 8 }, "requires": [] },
+        { "id": "crash_market", "label": "Ruin the elite and crash their financial game", "next": "ending_market_crash", "effects": { "wealth": 8, "reputation": 10, "police_heat": 8 }, "requires": [] }
+      ]
+    },
+    "ending_perfect_crew": {
+      "id": "ending_perfect_crew",
+      "type": "ending",
+      "title": "Perfect Crew",
+      "text": [
+        "Against all statistical probability, all three of you survive, rich and still speaking.",
+        "Sunfall calls you criminals. Financial media calls you disruptive innovators."
+      ],
+      "ending": {
+        "title": "Perfect Crew",
+        "summary": "You keep the crew intact and win big together.",
+        "status": { "Veteran": "Alive", "Hustler": "Alive", "Wildcard": "Alive", "Sunfall": "Robbed" },
+        "achievement": "perfect_crew"
+      }
+    },
+    "ending_sunset_king": {
+      "id": "ending_sunset_king",
+      "type": "ending",
+      "title": "Sunset King",
+      "text": [
+        "You consolidate Sunfall's underworld, private security sector, and enough corrupt officials to host a governance workshop.",
+        "It is not democracy, but it is efficient."
+      ],
+      "ending": {
+        "title": "Sunset King",
+        "summary": "You seize long-term control of Sunfall's criminal economy.",
+        "status": { "You": "Alive", "Crew": "Divided", "City": "Controlled", "Federal Taskforce": "Frustrated" },
+        "achievement": "sunset_king"
+      }
+    },
+    "ending_market_crash": {
+      "id": "ending_market_crash",
+      "type": "ending",
+      "title": "Market Crash",
+      "text": [
+        "You expose elite corruption and reroute fortunes in one surgical night of mayhem.",
+        "The rich stay rich, but now they are also publicly embarrassed, which in their world is basically prison."
+      ],
+      "ending": {
+        "title": "Market Crash",
+        "summary": "You weaponize finance and chaos to break the elite's grip.",
+        "status": { "You": "Alive", "Elites": "Disgraced", "Markets": "Volatile", "Public": "Entertained" },
+        "achievement": "market_crash"
+      }
+    },
+    "ending_retirement_plan": {
+      "id": "ending_retirement_plan",
+      "type": "ending",
+      "title": "Retirement Plan",
+      "text": [
+        "You leave with enough money to never work again and enough paranoia to never sleep again.",
+        "Sunfall keeps shining. You keep moving."
+      ],
+      "ending": {
+        "title": "Retirement Plan",
+        "summary": "You walk away before betrayal finishes the crew.",
+        "status": { "You": "Missing", "Crew": "Unresolved", "Sunfall": "Still Corrupt" },
+        "achievement": "retirement_plan"
+      }
+    }
+  }
+}

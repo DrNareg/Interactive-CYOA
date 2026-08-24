@@ -1,0 +1,9 @@
+{
+  "id": "liberty-nightshift",
+  "title": "GTA III: Alternate Timelines",
+  "subtitle": "One quiet driver, three families, and a city that mistakes silence for weakness.",
+  "estimatedMinutes": 14,
+  "setting": "Liberty City, 2001",
+  "version": "1.0",
+  "startingScene": "arrival"
+}

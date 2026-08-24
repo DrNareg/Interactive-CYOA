@@ -1,0 +1,172 @@
+{
+  "id": "frontier-redemption",
+  "title": "Red Dead Redemption 2: Alternate Timelines",
+  "subtitle": "The law is modernizing and your gang definitely is not.",
+  "estimatedMinutes": 17,
+  "setting": "The New Frontier, 1899",
+  "version": "1.0",
+  "startingScene": "winter_escape",
+  "achievements": [
+    { "id": "last_outlaw", "title": "Last Outlaw", "description": "Defeat every rival and survive the frontier's end.", "hidden": false },
+    { "id": "camp_keeper", "title": "Camp Keeper", "description": "Keep the camp fed and loyal through winter.", "hidden": false },
+    { "id": "new_life", "title": "New Life", "description": "Abandon the gang and build an honest ranch.", "hidden": false },
+    { "id": "pinkerton_file", "title": "Pinkerton File", "description": "Turn informant to survive modernization.", "hidden": true }
+  ],
+  "scenes": {
+    "winter_escape": {
+      "id": "winter_escape",
+      "title": "Winter Escape",
+      "text": [
+        "After a botched mountain robbery, your gang drags itself through blizzard country with two wagons, six grudges, and one speech-heavy leader.",
+        "The old world is ending. Railroads cut through sacred ground, telegraphs outrun horses, and bounty posters print faster than prayers.",
+        "Your camp needs food, medicine, and direction before the cold does what the law could not."
+      ],
+      "choices": [
+        { "id": "hunt_food", "label": "Hunt and stabilize the camp first", "next": "camp_morale", "effects": { "lance_loyalty": 8, "reputation": 4 }, "requires": [] },
+        { "id": "hit_supply_train", "label": "Hit a supply train despite the storm", "next": "rail_ambush", "effects": { "wealth": 8, "police_heat": 5 }, "requires": [] }
+      ]
+    },
+    "camp_morale": {
+      "id": "camp_morale",
+      "title": "Camp Morale",
+      "text": [
+        "At camp, people argue over rations, loyalty, and whether your leader's latest plan includes math.",
+        "Children need medicine, veterans need purpose, and everyone needs someone else to blame for the snow.",
+        "You can hold the family together or start preparing your own escape route."
+      ],
+      "choices": [
+        { "id": "support_camp", "label": "Support camp work and keep spirits up", "next": "rail_ambush", "effects": { "lance_loyalty": 10, "sonny_trust": 5 }, "requires": [] },
+        { "id": "stash_money", "label": "Secretly stash money for a future exit", "next": "rail_ambush", "effects": { "wealth": 6, "reputation": -2 }, "requires": [] }
+      ]
+    },
+    "rail_ambush": {
+      "id": "rail_ambush",
+      "title": "Rail Ambush",
+      "text": [
+        "You hit a railway payroll guarded by private gunmen who dress like bankers and shoot like cavalry.",
+        "The score is good, but so is the attention. Lawmen, industrial agents, and rival gangs all notice you at once.",
+        "Back in camp, your leader calls it destiny. Your sniper calls it noise."
+      ],
+      "choices": [
+        { "id": "double_down_raids", "label": "Double down on raids before spring", "next": "oilfield_offer", "effects": { "empire_power": 8, "police_heat": 7 }, "requires": [] },
+        { "id": "lay_low", "label": "Lay low and move camp south", "next": "oilfield_offer", "effects": { "police_heat": -3, "lance_loyalty": 5 }, "requires": [] }
+      ]
+    },
+    "oilfield_offer": {
+      "id": "oilfield_offer",
+      "title": "Oilfield Offer",
+      "text": [
+        "A polished industrialist hires you to sabotage rival drilling rights, promising enough cash to buy a county and enough lies to govern it.",
+        "He talks about progress while paying outlaws to do his dirty work. Civilization, apparently, is mostly branding.",
+        "If you take the offer, the camp eats. If you refuse, your principles stay warm while your people do not."
+      ],
+      "choices": [
+        { "id": "take_oil_job", "label": "Take the oil sabotage contract", "next": "tribal_crossroads", "effects": { "wealth": 10, "sonny_trust": 6 }, "requires": [] },
+        { "id": "refuse_oil_job", "label": "Refuse and pursue independent scores", "next": "tribal_crossroads", "effects": { "reputation": 8, "empire_power": 5 }, "requires": [] }
+      ]
+    },
+    "tribal_crossroads": {
+      "id": "tribal_crossroads",
+      "title": "Tribal Crossroads",
+      "text": [
+        "A tribal resistance cell asks for help against land seizures and military harassment.",
+        "Your leader wants to exploit the conflict for cover. Your conscience suggests there are lines even outlaws should not cross.",
+        "History is watching, badly written and heavily armed."
+      ],
+      "choices": [
+        { "id": "help_resistance", "label": "Help the resistance and hit military supply routes", "next": "agency_tracks", "effects": { "reputation": 10, "lance_loyalty": 6, "police_heat": 5 }, "requires": [] },
+        { "id": "use_conflict", "label": "Exploit the conflict for gang profit", "next": "agency_tracks", "effects": { "wealth": 8, "empire_power": 7, "reputation": -5 }, "requires": [] }
+      ]
+    },
+    "agency_tracks": {
+      "id": "agency_tracks",
+      "title": "Agency on the Tracks",
+      "text": [
+        "Federal agents close in with train manifests, informants, and a photographer who somehow appears at every crime scene before lunch.",
+        "They offer you one deal: hand over your leader and receive immunity, land papers, and a chance to become boring.",
+        "Boring sounds better every day, which is probably how they get you."
+      ],
+      "choices": [
+        { "id": "stay_loyal", "label": "Stay loyal and prepare one final score", "next": "last_score", "effects": { "lance_loyalty": 12, "reputation": 6 }, "requires": [] },
+        { "id": "flip_agency", "label": "Secretly cooperate with federal agents", "next": "last_score", "effects": { "sonny_trust": 12, "reputation": -10, "police_heat": -6 }, "requires": [] },
+        { "id": "leave_gang", "label": "Leave now and build a legal life", "next": "ending_new_life", "effects": { "wealth": 10, "police_heat": -8 }, "requires": [
+          { "variable": "wealth", "operator": ">=", "value": 14 }
+        ] }
+      ]
+    },
+    "last_score": {
+      "id": "last_score",
+      "title": "Last Score",
+      "text": [
+        "The gang's final plan targets a fortified mint convoy, a mountain pass, and probability itself.",
+        "Rain turns roads to mud. Old friendships turn to knives. The future arrives on steel rails whether you like it or not.",
+        "By dawn, you either become legend, evidence, or a farmer with unresolved trauma."
+      ],
+      "choices": [
+        { "id": "take_frontier", "label": "Win the score and dominate the frontier", "next": "ending_last_outlaw", "effects": { "empire_power": 14, "reputation": 8 }, "requires": [] },
+        { "id": "save_camp", "label": "Sacrifice profit to get camp families out", "next": "ending_camp_keeper", "effects": { "lance_loyalty": 14, "wealth": 4 }, "requires": [] },
+        { "id": "hand_over_leader", "label": "Deliver the leader to federal agents", "next": "ending_pinkerton_file", "effects": { "sonny_trust": 15, "reputation": -12 }, "requires": [] }
+      ]
+    },
+    "ending_last_outlaw": {
+      "id": "ending_last_outlaw",
+      "type": "ending",
+      "title": "Last Outlaw",
+      "text": [
+        "You survive the collapse and carve out a final outlaw dominion in the cracks of the modern age.",
+        "The telegraph calls you a criminal. Folk songs call you inevitable."
+      ],
+      "ending": {
+        "title": "Last Outlaw",
+        "summary": "You defeat rivals and outlast the frontier's dying era.",
+        "status": { "You": "Alive", "Gang": "Reduced", "Frontier": "Controlled", "Federal Presence": "Escalating" },
+        "achievement": "last_outlaw"
+      }
+    },
+    "ending_camp_keeper": {
+      "id": "ending_camp_keeper",
+      "type": "ending",
+      "title": "Camp Keeper",
+      "text": [
+        "You choose people over legend, helping families escape while the gang myth burns behind you.",
+        "No songs get written, but children grow up."
+      ],
+      "ending": {
+        "title": "Camp Keeper",
+        "summary": "You save the camp at the cost of outlaw glory.",
+        "status": { "You": "Alive", "Camp Families": "Safe", "Gang": "Disbanded", "Conscience": "Heavy but Intact" },
+        "achievement": "camp_keeper"
+      }
+    },
+    "ending_new_life": {
+      "id": "ending_new_life",
+      "type": "ending",
+      "title": "New Life",
+      "text": [
+        "You buy land, raise fences, and discover that cattle are still easier to manage than outlaws.",
+        "The horizon is quiet. For once, so are you."
+      ],
+      "ending": {
+        "title": "New Life",
+        "summary": "You leave the gang and begin a lawful ranch life.",
+        "status": { "You": "Alive", "Gang": "Left Behind", "Ranch": "Established", "Future": "Earned" },
+        "achievement": "new_life"
+      }
+    },
+    "ending_pinkerton_file": {
+      "id": "ending_pinkerton_file",
+      "type": "ending",
+      "title": "Pinkerton File",
+      "text": [
+        "You survive by becoming a federal file number with excellent recall and questionable morals.",
+        "The government pays you in safety and insomnia."
+      ],
+      "ending": {
+        "title": "Pinkerton File",
+        "summary": "You betray the gang to survive modernization.",
+        "status": { "You": "Alive", "Gang": "Betrayed", "Federal Agency": "Satisfied", "Legacy": "Complicated" },
+        "achievement": "pinkerton_file"
+      }
+    }
+  }
+}
