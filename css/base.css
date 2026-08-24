@@ -1,18 +1,21 @@
 :root {
-  --bg: #0d0d14;
-  --panel: rgba(23, 24, 36, 0.9);
-  --panel-strong: rgba(18, 19, 30, 0.96);
-  --panel-soft: rgba(37, 34, 53, 0.8);
-  --text: #f3f3f7;
-  --muted: #d2d2db;
-  --accent: #ffb703;
-  --accent-strong: #ffa000;
-  --accent-soft: rgba(255, 183, 3, 0.18);
-  --danger: #ff6b6b;
-  --ok: #6ee7b7;
-  --shadow: rgba(0, 0, 0, 0.35);
-  --border: rgba(255, 255, 255, 0.12);
-  --story-glow: rgba(255, 166, 0, 0.2);
+  --bg: #090811;
+  --panel: rgba(19, 22, 36, 0.8);
+  --panel-strong: rgba(12, 14, 26, 0.9);
+  --panel-soft: rgba(30, 31, 53, 0.65);
+  --text: #fdf8ee;
+  --muted: #d7cbdd;
+  --accent: #ff7e5f;
+  --accent-strong: #ffd166;
+  --accent-cyan: #4de4f7;
+  --accent-soft: rgba(255, 126, 95, 0.26);
+  --danger: #ff6f7a;
+  --ok: #77e6c4;
+  --shadow: rgba(2, 2, 9, 0.55);
+  --border: rgba(255, 255, 255, 0.18);
+  --story-glow: rgba(255, 126, 95, 0.28);
+  --font-heading: "Righteous", cursive;
+  --font-body: "Barlow Condensed", sans-serif;
 }
 
 * {
@@ -22,10 +25,8 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(255, 140, 0, 0.12), transparent 35%),
-    linear-gradient(180deg, #0d1018 0%, #101726 40%, #090c14 100%);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
   color: var(--text);
 }
 
@@ -34,6 +35,37 @@ body {
   display: flex;
   justify-content: center;
   align-items: stretch;
+  position: relative;
+  background: linear-gradient(160deg, #160d1f 0%, #10152a 45%, #08101f 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(10, 9, 18, 0.42), rgba(6, 10, 24, 0.75)),
+    radial-gradient(circle at 15% 12%, rgba(255, 129, 99, 0.32), transparent 30%),
+    radial-gradient(circle at 88% 20%, rgba(77, 228, 247, 0.24), transparent 30%),
+    url("../GTA%20Vice%20City%20Theme%20Background.jpg") center / cover no-repeat;
+  transform: scale(1.02);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 7px
+    );
 }
 
 button, input, select {
@@ -51,6 +83,37 @@ button {
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(255, 126, 95, 0.36);
+  color: #fff;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 126, 95, 0.8) rgba(18, 14, 28, 0.32);
+}
+
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+*::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(14, 10, 22, 0.52), rgba(9, 11, 22, 0.36));
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 126, 95, 0.96), rgba(255, 209, 102, 0.9));
+  border: 2px solid rgba(7, 8, 16, 0.45);
+  box-shadow: 0 0 10px rgba(255, 126, 95, 0.45);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(255, 143, 112, 1), rgba(255, 216, 119, 1));
 }
 
 @media (prefers-reduced-motion: reduce) {

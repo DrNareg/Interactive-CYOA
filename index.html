@@ -8,6 +8,12 @@
       name="description"
       content="Modular Choose Your Own Adventure engine with multiple story packs and replayable timelines."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Righteous&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/story.css" />
@@ -19,7 +25,10 @@
       <header class="topbar">
         <button id="home-button" class="secondary-button hidden">Story Select</button>
         <div class="brand-mark">VICE CITY // ALT TIMELINES</div>
-        <button id="reset-button" class="ghost-button">Reset</button>
+        <div class="topbar-actions">
+          <button id="music-toggle" class="ghost-button">Music: Off</button>
+          <button id="reset-button" class="ghost-button">Reset</button>
+        </div>
       </header>
 
       <main id="screen-root">
@@ -29,6 +38,10 @@
         <section id="timeline-screen" class="screen"></section>
       </main>
     </div>
+
+    <audio id="bg-music" loop preload="auto">
+      <source src="GTA Vice City Theme 5mins.m4a" type="audio/mp4" />
+    </audio>
 
     <script type="module" src="js/app.js"></script>
   </body>

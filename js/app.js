@@ -20,7 +20,10 @@ const app = {
   currentState: null,
   storyProgress: { stories: {} },
   achievements: [],
-  ui: {},
+  ui: {
+    audioReady: false,
+    hasUserGesture: false,
+  },
 };
 
 const defaultStory = {
@@ -505,8 +508,92 @@ function getScreenById(id) {
   return document.getElementById(id);
 }
 
+function useReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function activateScreen(screenId) {
+  document.querySelectorAll('.screen').forEach((screen) => {
+    screen.classList.remove('active', 'scene-reveal');
+  });
+
+  const nextScreen = getScreenById(screenId);
+  if (nextScreen) {
+    nextScreen.classList.add('active');
+    requestAnimationFrame(() => nextScreen.classList.add('scene-reveal'));
+  }
+  return nextScreen;
+}
+
+function scrollToNewSection(screenEl) {
+  if (!screenEl) return;
+
+  const target = screenEl.querySelector('.story-hero') || screenEl;
+  target.scrollIntoView({
+    behavior: useReducedMotion() ? 'auto' : 'smooth',
+    block: 'start',
+  });
+}
+
+function updateMusicToggle(isPlaying) {
+  const toggle = document.getElementById('music-toggle');
+  if (!toggle) return;
+
+  toggle.dataset.playing = isPlaying ? 'true' : 'false';
+  toggle.textContent = `Music: ${isPlaying ? 'On' : 'Off'}`;
+}
+
+async function startBackgroundMusic() {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return false;
+
+  try {
+    await audio.play();
+    app.ui.audioReady = true;
+    updateMusicToggle(true);
+    return true;
+  } catch (error) {
+    updateMusicToggle(false);
+    return false;
+  }
+}
+
+function setupBackgroundMusic() {
+  const audio = document.getElementById('bg-music');
+  const toggle = document.getElementById('music-toggle');
+  if (!audio || !toggle) return;
+
+  audio.volume = 0.35;
+  audio.loop = true;
+  audio.preload = 'auto';
+
+  updateMusicToggle(!audio.paused);
+
+  const unlockAudio = async () => {
+    if (app.ui.hasUserGesture) return;
+    app.ui.hasUserGesture = true;
+    await startBackgroundMusic();
+    document.removeEventListener('pointerdown', unlockAudio);
+    document.removeEventListener('keydown', unlockAudio);
+  };
+
+  document.addEventListener('pointerdown', unlockAudio, { once: false });
+  document.addEventListener('keydown', unlockAudio, { once: false });
+
+  toggle.addEventListener('click', async () => {
+    if (audio.paused) {
+      app.ui.hasUserGesture = true;
+      await startBackgroundMusic();
+      return;
+    }
+
+    audio.pause();
+    updateMusicToggle(false);
+  });
+}
+
 function renderStorySelect() {
-  const screen = getScreenById('story-select-screen');
+  const screen = activateScreen('story-select-screen');
   screen.innerHTML = `
     <div class="story-hero">
       <h1>Choose Your Timeline</h1>
@@ -527,11 +614,12 @@ function renderStorySelect() {
   screen.querySelectorAll('[data-story]').forEach((button) => {
     button.addEventListener('click', () => startStory(button.dataset.story));
   });
+
+  scrollToNewSection(screen);
 }
 
 function renderIntro(story) {
-  const screen = getScreenById('story-intro-screen');
-  screen.classList.add('active');
+  const screen = activateScreen('story-intro-screen');
   screen.innerHTML = `
     <div class="story-hero">
       <h1>${story.title}</h1>
@@ -551,6 +639,8 @@ function renderIntro(story) {
   document.getElementById('begin-story-btn').addEventListener('click', () => {
     renderStoryScreen(story, story.startingScene);
   });
+
+  scrollToNewSection(screen);
 }
 
 function appStateFromStory(story) {
@@ -597,7 +687,7 @@ function choiceIsVisible(state, choice) {
 }
 
 function renderStoryScreen(story, sceneId) {
-  const screen = getScreenById('story-screen');
+  const screen = activateScreen('story-screen');
   const scene = resolveScene(story, sceneId);
 
   app.currentStory = story;
@@ -605,7 +695,6 @@ function renderStoryScreen(story, sceneId) {
   app.currentState.currentSceneId = scene.id;
   markSceneVisited(app.currentState, scene.id);
 
-  screen.classList.add('active');
   const visibleChoices = (scene.choices || []).filter((choice) => choiceIsVisible(app.currentState, choice));
 
   const detailEl = document.createElement('div');
@@ -664,10 +753,11 @@ function renderStoryScreen(story, sceneId) {
   });
 
   document.getElementById('home-button').classList.remove('hidden');
+  scrollToNewSection(screen);
 }
 
 function renderEndingScreen(story, scene, choice) {
-  const screen = getScreenById('story-screen');
+  const screen = activateScreen('story-screen');
   const endingId = choice.next || scene.id;
   const endingScene = story.scenes[endingId] || scene;
   const ending = endingScene.ending || { title: 'Timeline Complete', status: {}, summary: 'You reached a dramatic end.' };
@@ -715,21 +805,18 @@ function renderEndingScreen(story, scene, choice) {
     unlockAchievement(achievements, achievementId);
     app.achievements = achievements;
   }
+
+  scrollToNewSection(screen);
 }
 
 function showStorySelect() {
   app.currentState = null;
-  document.getElementById('story-select-screen').classList.add('active');
-  document.getElementById('story-intro-screen').classList.remove('active');
-  document.getElementById('story-screen').classList.remove('active');
-  document.getElementById('timeline-screen').classList.remove('active');
   document.getElementById('home-button').classList.add('hidden');
   renderStorySelect();
 }
 
 function renderTimelineScreen(story) {
-  const screen = getScreenById('timeline-screen');
-  screen.classList.add('active');
+  const screen = activateScreen('timeline-screen');
   const timeline = app.currentState?.timeline || [];
   const summary = computeTimelineSummary(timeline);
   screen.innerHTML = `
@@ -768,6 +855,8 @@ function renderTimelineScreen(story) {
     renderStoryScreen(story, latestScene);
   });
   document.getElementById('story-select-btn-2').addEventListener('click', () => showStorySelect());
+
+  scrollToNewSection(screen);
 }
 
 async function startStory(storyId) {
@@ -785,12 +874,11 @@ async function startStory(storyId) {
   app.storyProgress = loadProgress();
 
   renderIntro(app.currentStory);
-  document.getElementById('story-select-screen').classList.remove('active');
-  document.getElementById('story-screen').classList.remove('active');
-  document.getElementById('timeline-screen').classList.remove('active');
 }
 
 async function initializeApp() {
+  setupBackgroundMusic();
+
   const homeButton = document.getElementById('home-button');
   homeButton.addEventListener('click', showStorySelect);
   document.getElementById('reset-button').addEventListener('click', () => {
