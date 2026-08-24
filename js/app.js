@@ -23,6 +23,7 @@ const app = {
   ui: {
     audioReady: false,
     hasUserGesture: false,
+    musicEnabled: true,
   },
 };
 
@@ -539,8 +540,9 @@ function updateMusicToggle(isPlaying) {
   const toggle = document.getElementById('music-toggle');
   if (!toggle) return;
 
-  toggle.dataset.playing = isPlaying ? 'true' : 'false';
-  toggle.textContent = `Music: ${isPlaying ? 'On' : 'Off'}`;
+  const enabled = app.ui.musicEnabled;
+  toggle.dataset.playing = enabled && isPlaying ? 'true' : 'false';
+  toggle.textContent = `Music: ${enabled ? 'On' : 'Off'}`;
 }
 
 async function startBackgroundMusic() {
@@ -566,27 +568,49 @@ function setupBackgroundMusic() {
   audio.volume = 0.35;
   audio.loop = true;
   audio.preload = 'auto';
+  audio.autoplay = true;
 
-  updateMusicToggle(!audio.paused);
+  updateMusicToggle(app.ui.musicEnabled && !audio.paused);
+
+  audio.addEventListener('ended', () => {
+    if (!app.ui.musicEnabled) return;
+    audio.currentTime = 0;
+    void audio.play().catch(() => {
+      updateMusicToggle(false);
+    });
+  });
+
+  if (app.ui.musicEnabled) {
+    void startBackgroundMusic();
+  }
 
   const unlockAudio = async () => {
-    if (app.ui.hasUserGesture) return;
+    if (app.ui.hasUserGesture && app.ui.audioReady) return;
     app.ui.hasUserGesture = true;
-    await startBackgroundMusic();
-    document.removeEventListener('pointerdown', unlockAudio);
-    document.removeEventListener('keydown', unlockAudio);
+    if (!app.ui.musicEnabled) {
+      updateMusicToggle(false);
+      return;
+    }
+
+    const started = await startBackgroundMusic();
+    if (started) {
+      document.removeEventListener('pointerdown', unlockAudio);
+      document.removeEventListener('keydown', unlockAudio);
+    }
   };
 
   document.addEventListener('pointerdown', unlockAudio, { once: false });
   document.addEventListener('keydown', unlockAudio, { once: false });
 
   toggle.addEventListener('click', async () => {
-    if (audio.paused) {
+    if (!app.ui.musicEnabled) {
+      app.ui.musicEnabled = true;
       app.ui.hasUserGesture = true;
       await startBackgroundMusic();
       return;
     }
 
+    app.ui.musicEnabled = false;
     audio.pause();
     updateMusicToggle(false);
   });

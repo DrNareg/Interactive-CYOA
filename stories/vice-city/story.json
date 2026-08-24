@@ -2,7 +2,7 @@
   "id": "vice-city",
   "title": "Vice City: Alternate Timelines",
   "subtitle": "What if Tommy chose differently?",
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 14,
   "setting": "Vice City, 1986",
   "version": "1.0",
   "startingScene": "opening_deal",
@@ -22,7 +22,9 @@
       "text": [
         "The exchange was supposed to be simple. Money. Cocaine. A clean handoff in the neon haze of Vice City.",
         "Instead, the warehouse erupts in gunfire. The cash is gone. The product is gone. And Tommy Vercetti is left staring at a dead courier and a phone that is already ringing.",
-        "Sonny Forelli wants answers. The city is watching. And Tommy realizes the bad deal may be only the beginning."
+        "Sonny Forelli wants answers. The city is watching. And Tommy realizes the bad deal may be only the beginning.",
+        "Somewhere outside, a radio DJ cheerfully announces beach weather while a sedan burns in the loading bay. Vice City has always had perfect timing.",
+        "Tommy checks his suit for bullet holes and finds only sweat, bad luck, and somebody else's blood. By local standards, that counts as a good morning."
       ],
       "choices": [
         { "id": "call_sonny", "label": "Call Sonny and tell him the truth", "next": "sonny_call", "effects": { "sonny_trust": 8, "reputation": 4 }, "requires": [] },
@@ -36,10 +38,12 @@
       "text": [
         "Sonny listens, then laughs once before the line goes cold. He is furious, but he has seen Tommy survive worse than this.",
         "The boss gives him one task: find the men responsible, and make the loss right.",
-        "In Vice City, a favor from Sonny can be a weapon. A refusal can be a death sentence."
+        "In Vice City, a favor from Sonny can be a weapon. A refusal can be a death sentence.",
+        "The line clicks dead, then immediately rings again. It is a wrong number asking for pizza delivery. Tommy almost says yes, because at least pizza has predictable outcomes.",
+        "He hangs up, holsters the panic, and writes a fresh to-do list: find the thieves, dodge the cops, and avoid developing feelings."
       ],
       "choices": [
-        { "id": "investigate_rise", "label": "Start an investigation and trace the missing shipment", "next": "investigation", "effects": { "reputation": 5, "police_heat": 4 }, "requires": [] },
+        { "id": "investigate_rise", "label": "Start an investigation and trace the missing shipment", "next": "street_intel", "effects": { "reputation": 5, "police_heat": 4 }, "requires": [] },
         { "id": "make_contact", "label": "Use the network and look for a fixer", "next": "diaz_meeting", "effects": { "diaz_trust": 6, "wealth": 4 }, "requires": [] }
       ]
     },
@@ -48,10 +52,12 @@
       "title": "The Lie",
       "text": [
         "The lie is smooth, fast, and ugly. Sonny is not convinced, but he is unwilling to waste a man he has not yet decided to kill.",
-        "Tommy leaves the call with a new problem: the city knows he is vulnerable, and everyone wants a piece of his panic."
+        "Tommy leaves the call with a new problem: the city knows he is vulnerable, and everyone wants a piece of his panic.",
+        "A kid on a BMX rides past shouting Tommy's name like he is a celebrity. In Vice City, fame is just infamy with better lighting.",
+        "The lie bought him time, which in this town is basically a short-term rental with no deposit and terrible neighbors."
       ],
       "choices": [
-        { "id": "look_for_diaz", "label": "Look for Diaz and work the city quietly", "next": "diaz_meeting", "effects": { "diaz_trust": 8, "wealth": 2 }, "requires": [] },
+        { "id": "look_for_diaz", "label": "Look for Diaz and work the city quietly", "next": "club_backroom", "effects": { "diaz_trust": 8, "wealth": 2 }, "requires": [] },
         { "id": "rally_lance", "label": "Ask Lance to help stabilize the operation", "next": "lance_support", "effects": { "lance_loyalty": 10, "reputation": 3 }, "requires": [] }
       ]
     },
@@ -61,11 +67,41 @@
       "text": [
         "The words hit like a gunshot. Sonny goes silent. Tommy can almost hear the gears in the Forelli machine turn toward him.",
         "He is not just in debt. He is in open rebellion. The city starts to make sense: everybody has a side and a price.",
-        "This is the moment where the empire begins to become more than a simple delivery route."
+        "This is the moment where the empire begins to become more than a simple delivery route.",
+        "A gull lands on the hood of a stolen car and screams at him like a disapproving accountant. Even the wildlife thinks this is a risky investment.",
+        "Tommy shrugs, lights a cigarette, and decides that if he is going to drown, he might as well own the swimming pool first."
       ],
       "choices": [
         { "id": "take_the_city", "label": "Move out on your own and build influence", "next": "investigation", "effects": { "empire_power": 12, "reputation": 6 }, "requires": [] },
         { "id": "seek_work", "label": "Find work with Diaz and learn the game from the inside", "next": "diaz_meeting", "effects": { "diaz_trust": 12, "wealth": 8 }, "requires": [] }
+      ]
+    },
+    "street_intel": {
+      "id": "street_intel",
+      "title": "Street Intelligence",
+      "text": [
+        "Tommy spends the night bouncing between bodegas, pawn shops, and the kind of bars where every stool has heard a felony confession.",
+        "Word is the shipment moved through two fake trucking fronts and one accountant who vanished right after buying a gold speedboat. Priorities.",
+        "By sunrise he has names, license plates, and a tab at a diner that serves coffee strong enough to revive dead ambitions.",
+        "Vice City's true currency is gossip. Money helps, sure, but gossip gets delivered faster and screams less when you spend it."
+      ],
+      "choices": [
+        { "id": "bribe_dispatch", "label": "Bribe the dispatch clerk for route logs", "next": "investigation", "effects": { "wealth": -3, "reputation": 3, "police_heat": -2 }, "requires": [] },
+        { "id": "scare_bookie", "label": "Lean on a bookie who launders shipping bets", "next": "investigation", "effects": { "reputation": 5, "police_heat": 6 }, "requires": [] }
+      ]
+    },
+    "club_backroom": {
+      "id": "club_backroom",
+      "title": "Backroom at The Pole Position",
+      "text": [
+        "The bass is loud enough to rearrange internal organs, and the backroom smells like cologne, fear, and very expensive bad decisions.",
+        "A promoter in a white suit swears he saw Diaz's runner exchanging duffel bags behind the stage curtain during a fireworks finale.",
+        "A bartender with perfect eyeliner slides Tommy a napkin with an address, then asks for a tip before he even reads it. Professional standards.",
+        "Tommy pockets the note and wonders how many empires in this city were built on napkins and lies. The answer appears to be all of them."
+      ],
+      "choices": [
+        { "id": "tip_bartender", "label": "Pay for the address and keep things quiet", "next": "diaz_meeting", "effects": { "wealth": -2, "diaz_trust": 4 }, "requires": [] },
+        { "id": "rough_up_promoter", "label": "Rattle the promoter for extra names", "next": "lance_support", "effects": { "reputation": 4, "police_heat": 3 }, "requires": [] }
       ]
     },
     "investigation": {
@@ -73,12 +109,28 @@
       "title": "The Investigation",
       "text": [
         "A trail leads to a set of interviews, broken ties, and a few very expensive mistakes. Looters, smugglers, and ambitious hustlers all smell blood in the water.",
-        "Lance keeps asking when the city will start paying him back. Diaz keeps smiling like he already knows which side is going to win."
+        "Lance keeps asking when the city will start paying him back. Diaz keeps smiling like he already knows which side is going to win.",
+        "Tommy maps the mess on a motel wall with stolen pens and zero sleep. By the third hour, it looks less like a strategy and more like modern art sponsored by paranoia.",
+        "A traffic cop whistles at him while he studies the map through the window, then asks for an autograph. Corruption in Vice City is surprisingly friendly."
       ],
       "choices": [
-        { "id": "work_with_lance", "label": "Trust Lance and build an alliance", "next": "lance_alliance", "effects": { "lance_loyalty": 18, "empire_power": 8 }, "requires": [] },
+        { "id": "work_with_lance", "label": "Trust Lance and build an alliance", "next": "warehouse_sting", "effects": { "lance_loyalty": 18, "empire_power": 8 }, "requires": [] },
         { "id": "deal_with_diaz", "label": "Approach Diaz with a proposal", "next": "diaz_meeting", "effects": { "diaz_trust": 10, "wealth": 5 }, "requires": [] },
         { "id": "hoard_money", "label": "Take the money and keep your head low", "next": "money_route", "effects": { "wealth": 14, "reputation": -4 }, "requires": [] }
+      ]
+    },
+    "warehouse_sting": {
+      "id": "warehouse_sting",
+      "title": "Warehouse Sting",
+      "text": [
+        "Tommy and Lance stake out a rusted warehouse by the docks, sharing stale donuts and pretending this counts as tactical planning.",
+        "At midnight, two trucks arrive, one carrying product and one carrying men who definitely skip leg day but never skip gun day.",
+        "Lance wants fireworks. Tommy wants control. The city wants headlines. Only one of those is good for long-term business.",
+        "A stray cat walks across the hood during the standoff like it owns the place. Honestly, it probably does."
+      ],
+      "choices": [
+        { "id": "clean_hit", "label": "Run a clean hit and take the cargo", "next": "lance_alliance", "effects": { "empire_power": 6, "lance_loyalty": 8 }, "requires": [] },
+        { "id": "messy_hit", "label": "Go loud and let fear do the paperwork", "next": "diaz_betrayal", "effects": { "empire_power": 9, "police_heat": 8, "reputation": 4 }, "requires": [] }
       ]
     },
     "lance_support": {
@@ -98,12 +150,28 @@
       "title": "The Diaz Meeting",
       "text": [
         "Diaz is calm in a way that feels expensive. He talks like a man who has already mapped the city in his head and is just waiting to see whether Tommy is useful or disposable.",
-        "The deal is lucrative. The cost is subtle. One promise made in private can become a chain on a future Monday morning."
+        "The deal is lucrative. The cost is subtle. One promise made in private can become a chain on a future Monday morning.",
+        "Diaz offers imported whiskey and local threats with equal hospitality. The glass is crystal, the warning is bulletproof.",
+        "Tommy nods through the performance and counts exits. Vice City etiquette says smiling is mandatory, trust is optional, and furniture is temporary."
       ],
       "choices": [
         { "id": "accept_diaz", "label": "Take Diaz's offer and work the city together", "next": "diaz_partnership", "effects": { "diaz_trust": 18, "wealth": 8, "empire_power": 5 }, "requires": [] },
-        { "id": "play_diaz", "label": "Play both sides and keep your options open", "next": "lance_alliance", "effects": { "diaz_trust": 6, "reputation": 6 }, "requires": [] },
+        { "id": "play_diaz", "label": "Play both sides and keep your options open", "next": "double_booked", "effects": { "diaz_trust": 6, "reputation": 6 }, "requires": [] },
         { "id": "betray_diaz", "label": "Set Diaz up and prepare for a hostile takeover", "next": "diaz_betrayal", "effects": { "diaz_trust": -25, "empire_power": 12, "reputation": 8 }, "requires": [] }
+      ]
+    },
+    "double_booked": {
+      "id": "double_booked",
+      "title": "Double-Booked",
+      "text": [
+        "By noon Tommy is promising loyalty to Diaz in a mansion and promising independence to Lance in a parking lot behind a seafood place.",
+        "By evening both men want progress reports, and Tommy wants a second head just to keep up with his lies.",
+        "A payphone rings every twenty minutes like the city itself is checking whether he has collapsed yet.",
+        "He has not collapsed. He has simply entered the advanced chapter of strategic nonsense."
+      ],
+      "choices": [
+        { "id": "keep_everyone_happy", "label": "Balance both alliances for one more night", "next": "final_preparations", "effects": { "diaz_trust": 4, "lance_loyalty": 4, "reputation": 3 }, "requires": [] },
+        { "id": "cash_and_dash", "label": "Skim cash and disappear into quieter business", "next": "money_route", "effects": { "wealth": 8, "reputation": -2 }, "requires": [] }
       ]
     },
     "lance_alliance": {
@@ -111,23 +179,27 @@
       "title": "The Risk of Trust",
       "text": [
         "The city asks for one thing: loyalty. Lance needs to believe Tommy will not discard him. Tommy needs Lance to see him as a partner, not a superior with a gun.",
-        "A shared plan could make them unstoppable. A badly handled ego could turn a brother into a rival."
+        "A shared plan could make them unstoppable. A badly handled ego could turn a brother into a rival.",
+        "They argue over percentages for twenty minutes and moral philosophy for six seconds. The percentages win.",
+        "Outside, someone sets off fireworks at 2 p.m. for no reason. Vice City respects confidence, even when it is objectively stupid."
       ],
       "choices": [
-        { "id": "truly_partner", "label": "Treat Lance like a true partner and share the empire", "next": "final_push", "effects": { "lance_loyalty": 22, "empire_power": 12, "reputation": 8 }, "requires": [] },
-        { "id": "control_lance", "label": "Put Lance in charge of operations and keep control yourself", "next": "final_push", "effects": { "lance_loyalty": 12, "empire_power": 9 }, "requires": [] },
-        { "id": "two_finger_salute", "label": "Keep Lance close but make sure he never gets too comfortable", "next": "final_push", "effects": { "lance_loyalty": -6, "reputation": 4 }, "requires": [] }
+        { "id": "truly_partner", "label": "Treat Lance like a true partner and share the empire", "next": "final_preparations", "effects": { "lance_loyalty": 22, "empire_power": 12, "reputation": 8 }, "requires": [] },
+        { "id": "control_lance", "label": "Put Lance in charge of operations and keep control yourself", "next": "final_preparations", "effects": { "lance_loyalty": 12, "empire_power": 9 }, "requires": [] },
+        { "id": "two_finger_salute", "label": "Keep Lance close but make sure he never gets too comfortable", "next": "final_preparations", "effects": { "lance_loyalty": -6, "reputation": 4 }, "requires": [] }
       ]
     },
     "money_route": {
       "id": "money_route",
       "title": "The Quiet Route",
       "text": [
-        "A pile of money buys a little breathing room. The city keeps moving regardless. Sonny is still angry. Diaz is still watching. And Tommy realizes that eventually every quiet move becomes a visible one."
+        "A pile of money buys a little breathing room. The city keeps moving regardless. Sonny is still angry. Diaz is still watching. And Tommy realizes that eventually every quiet move becomes a visible one.",
+        "He invests in shell companies with names like Tropical Imports LLC and Absolutely Legal Holdings. The paperwork is cleaner than the business model.",
+        "For seventy-two peaceful hours, nobody shoots at him. Tommy starts to worry this is how retirees feel."
       ],
       "choices": [
         { "id": "leave_city", "label": "Cash out and leave Vice City before it devours him", "next": "ending_reasonable_adult", "effects": { "wealth": 16, "sonny_trust": 10 }, "requires": [] },
-        { "id": "double_down", "label": "Double down and build a bigger empire anyway", "next": "final_push", "effects": { "empire_power": 18, "reputation": 8, "police_heat": 10 }, "requires": [] }
+        { "id": "double_down", "label": "Double down and build a bigger empire anyway", "next": "final_preparations", "effects": { "empire_power": 18, "reputation": 8, "police_heat": 10 }, "requires": [] }
       ]
     },
     "diaz_betrayal": {
@@ -135,22 +207,41 @@
       "title": "The Break",
       "text": [
         "Diaz reacts like a man who has spent a lifetime planning for a knife in the back. Tommy is no longer a pawn. He is a problem.",
-        "The next move determines whether the city belongs to a king, a partner, or a corpse."
+        "The next move determines whether the city belongs to a king, a partner, or a corpse.",
+        "A crate of imported televisions explodes in the crossfire, broadcasting static to half the block. Nobody notices the difference.",
+        "Tommy hears his own name on a police scanner and decides that anonymity is officially off the menu."
       ],
       "choices": [
-        { "id": "fight_diaz", "label": "Take Diaz out and claim the city for yourself", "next": "final_push", "effects": { "diaz_trust": -30, "empire_power": 20, "reputation": 9 }, "requires": [] },
-        { "id": "share_war", "label": "Use Lance against Diaz and split the spoils later", "next": "final_push", "effects": { "lance_loyalty": 12, "empire_power": 10 }, "requires": [] }
+        { "id": "fight_diaz", "label": "Take Diaz out and claim the city for yourself", "next": "final_preparations", "effects": { "diaz_trust": -30, "empire_power": 20, "reputation": 9 }, "requires": [] },
+        { "id": "share_war", "label": "Use Lance against Diaz and split the spoils later", "next": "final_preparations", "effects": { "lance_loyalty": 12, "empire_power": 10 }, "requires": [] }
       ]
     },
     "diaz_partnership": {
       "id": "diaz_partnership",
       "title": "The Partnership",
       "text": [
-        "Diaz keeps his promises. Tommy keeps his nerve. It is a working arrangement, not a love story. Yet somewhere in the city, the quiet kind of power is the most dangerous kind of all."
+        "Diaz keeps his promises. Tommy keeps his nerve. It is a working arrangement, not a love story. Yet somewhere in the city, the quiet kind of power is the most dangerous kind of all.",
+        "Their operation runs like a luxury hotel: polished front desk, terrified staff, and one basement nobody asks about.",
+        "Tommy enjoys the money, mistrusts the peace, and keeps an overnight bag by the door just in case friendship turns into artillery."
       ],
       "choices": [
         { "id": "stay_with_diaz", "label": "Stay aligned with Diaz and let the empire grow around the arrangement", "next": "ending_diaz_empire", "effects": { "diaz_trust": 22, "wealth": 16 }, "requires": [] },
-        { "id": "turn_on_diaz_later", "label": "Play nice for now, but start preparing to betray him", "next": "final_push", "effects": { "diaz_trust": 8, "empire_power": 8 }, "requires": [] }
+        { "id": "turn_on_diaz_later", "label": "Play nice for now, but start preparing to betray him", "next": "final_preparations", "effects": { "diaz_trust": 8, "empire_power": 8 }, "requires": [] }
+      ]
+    },
+    "final_preparations": {
+      "id": "final_preparations",
+      "title": "Last Week Before War",
+      "text": [
+        "With the city on edge, Tommy spends a brutal week bribing officials, moving product, and pretending his sleep schedule is optional.",
+        "Every ally demands a favor. Every favor creates two enemies. The math is ugly, but at least it is consistent.",
+        "Billboards sell perfume while armed convoys pass underneath. Vice City never picks between classy and criminal because it knows it can do both.",
+        "By Friday night, Tommy has enough guns for a small revolution and enough anxiety for a large one."
+      ],
+      "choices": [
+        { "id": "buy_cops", "label": "Buy breathing room with strategic bribes", "next": "final_push", "effects": { "wealth": -10, "police_heat": -8, "reputation": 3 }, "requires": [] },
+        { "id": "arm_neighborhood", "label": "Arm every corner and dare rivals to blink", "next": "final_push", "effects": { "empire_power": 10, "reputation": 6, "police_heat": 4 }, "requires": [] },
+        { "id": "lay_low_listen", "label": "Lay low, gather intel, and strike second", "next": "final_push", "effects": { "sonny_trust": 4, "diaz_trust": 4, "wealth": -3 }, "requires": [] }
       ]
     },
     "final_push": {
@@ -158,7 +249,9 @@
       "title": "Final Push",
       "text": [
         "The final confrontation begins with fireworks, blood, and bad decisions. Sonny is circling. Diaz is alive or dead depending on the path. Lance is a partner, a rival, or a ghost.",
-        "Tommy has enough influence to either become the king of the city or the bloodstain beneath it."
+        "Tommy has enough influence to either become the king of the city or the bloodstain beneath it.",
+        "Phones ring nonstop with contradictory advice from men who have never survived a gunfight and definitely never balanced a budget.",
+        "By dawn, the map is simple: you win, you lose, or you become a cautionary tale used by bartenders for tips."
       ],
       "choices": [
         { "id": "end_king", "label": "Strike hard and take the city outright", "next": "ending_king_of_vice_city", "effects": { "empire_power": 18, "reputation": 10 }, "requires": [] },
@@ -175,7 +268,8 @@
       "title": "King of Vice City",
       "text": [
         "Tommy takes the city by force, outlasting the worst of Sonny and the chaos of Diaz. He wins by being harder, faster, and less sentimental than everyone else.",
-        "Vice City becomes his. The neon never stops flashing. The city never sleeps. And the men who were meant to break him are now room-temperature memories."
+        "Vice City becomes his. The neon never stops flashing. The city never sleeps. And the men who were meant to break him are now room-temperature memories.",
+        "He celebrates by buying a mansion with too many mirrors and exactly zero humility. In this town, that is called tasteful restraint."
       ],
       "ending": {
         "title": "King of Vice City",
@@ -189,7 +283,8 @@
       "type": "ending",
       "title": "Vercetti & Vance",
       "text": [
-        "Tommy and Lance realize the only way to survive the city is to stop pretending the other is disposable. They share the empire, the risk, and the blood."
+        "Tommy and Lance realize the only way to survive the city is to stop pretending the other is disposable. They share the empire, the risk, and the blood.",
+        "Their meetings are loud, their profits are louder, and somehow both men are still alive by Christmas. It's practically a holiday miracle."
       ],
       "ending": {
         "title": "Vercetti & Vance",
@@ -203,7 +298,8 @@
       "type": "ending",
       "title": "Lance Vance",
       "text": [
-        "Lance sees the hand on the trigger, step aside, and choose his own future. He betrays Tommy, takes the empire, and smiles through the blood."
+        "Lance sees the hand on the trigger, step aside, and choose his own future. He betrays Tommy, takes the empire, and smiles through the blood.",
+        "In his first speech as boss, he promises a new era of trust, transparency, and immediate retaliation. The room applauds nervously."
       ],
       "ending": {
         "title": "Lance Vance",
@@ -217,7 +313,8 @@
       "type": "ending",
       "title": "Forelli Victory",
       "text": [
-        "Tommy loses the war before he ever truly wins it. Sonny outlasts him, and the city turns its back when it is time to collect the debt."
+        "Tommy loses the war before he ever truly wins it. Sonny outlasts him, and the city turns its back when it is time to collect the debt.",
+        "Sonny throws a victory party where the shrimp is fresh, the suits are sharp, and nobody says Tommy's name unless they're charging interest."
       ],
       "ending": {
         "title": "Forelli Victory",
@@ -231,7 +328,8 @@
       "type": "ending",
       "title": "Diaz Empire",
       "text": [
-        "Tommy keeps his promises to Diaz and becomes another voice in the machine. The arrangement works. The empire grows. But Tommy never stopped becoming someone else."
+        "Tommy keeps his promises to Diaz and becomes another voice in the machine. The arrangement works. The empire grows. But Tommy never stopped becoming someone else.",
+        "He gains money, power, and a permanent migraine from listening to Diaz explain loyalty for the two-hundredth time."
       ],
       "ending": {
         "title": "Diaz Empire",
@@ -245,7 +343,8 @@
       "type": "ending",
       "title": "Empire Collapse",
       "text": [
-        "Tommy wins the battle but not the peace. The empire is too violent, too volatile, and too broken by the people he trusted to stand still for long."
+        "Tommy wins the battle but not the peace. The empire is too violent, too volatile, and too broken by the people he trusted to stand still for long.",
+        "Three neighborhoods declare independence by Tuesday, and one nightclub declares bankruptcy by lunch. Even chaos has performance goals."
       ],
       "ending": {
         "title": "Empire Collapse",
@@ -259,7 +358,8 @@
       "type": "ending",
       "title": "The Reasonable Adult",
       "text": [
-        "Tommy takes the money, quits the game, and leaves Vice City with his skin intact. It is the most boring ending in town, and somehow it may be the smartest one."
+        "Tommy takes the money, quits the game, and leaves Vice City with his skin intact. It is the most boring ending in town, and somehow it may be the smartest one.",
+        "A week later he tries golf, hates it, and briefly considers returning to organized crime just for the cardio."
       ],
       "ending": {
         "title": "The Reasonable Adult",
