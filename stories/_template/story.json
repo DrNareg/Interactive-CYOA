@@ -1,0 +1,62 @@
+{
+  "id": "template-story",
+  "title": "Template Story",
+  "subtitle": "A small example for new story packs.",
+  "estimatedMinutes": 5,
+  "setting": "Example World",
+  "version": "1.0",
+  "startingScene": "intro",
+  "achievements": [
+    { "id": "template_hero", "title": "Template Hero", "description": "Finish the example story.", "hidden": false }
+  ],
+  "scenes": {
+    "intro": {
+      "id": "intro",
+      "title": "The First Choice",
+      "text": [
+        "You stand at the edge of a quiet town and the road splits in two.",
+        "Either path may lead to a bigger story, but only one will keep your nerve."
+      ],
+      "choices": [
+        { "id": "take_the_road", "label": "Take the road to the market", "next": "market", "effects": { "trust": 5 }, "requires": [] },
+        { "id": "follow_the_river", "label": "Follow the river toward the old bridge", "next": "bridge", "effects": { "courage": 4 }, "requires": [] }
+      ]
+    },
+    "market": {
+      "id": "market",
+      "title": "Market Day",
+      "text": [
+        "The market is busy and full of gossip. A merchant offers a bargain that could change your future."
+      ],
+      "choices": [
+        { "id": "buy_the_map", "label": "Buy the map and keep moving", "next": "ending", "effects": { "trust": 6 }, "requires": [] },
+        { "id": "ignore_the_offer", "label": "Skip the bargain and head for the bridge", "next": "bridge", "effects": { "courage": 5 }, "requires": [] }
+      ]
+    },
+    "bridge": {
+      "id": "bridge",
+      "title": "Old Bridge",
+      "text": [
+        "The bridge creaks above the river. A stranger warns you the water can carry a secret if you are brave enough to listen."
+      ],
+      "choices": [
+        { "id": "listen", "label": "Listen to the stranger", "next": "ending", "effects": { "trust": 8 }, "requires": [] },
+        { "id": "cross_fast", "label": "Cross quickly and keep the mission secret", "next": "ending", "effects": { "courage": 8 }, "requires": [] }
+      ]
+    },
+    "ending": {
+      "id": "ending",
+      "type": "ending",
+      "title": "The Road Opens",
+      "text": [
+        "You leave town with a new sense of purpose and the first hint of a wider world waiting beyond the horizon."
+      ],
+      "ending": {
+        "title": "The Road Opens",
+        "summary": "You complete the template story and are ready to build your own world.",
+        "status": { "Player": "Alive" },
+        "achievement": "template_hero"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "vice-city",
+  "title": "Vice City: Alternate Timelines",
+  "subtitle": "What if Tommy chose differently?",
+  "estimatedMinutes": 8,
+  "setting": "Vice City, 1986",
+  "version": "1.0",
+  "startingScene": "opening_deal"
+}

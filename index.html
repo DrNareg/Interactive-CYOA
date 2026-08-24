@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive CYOA</title>
+    <meta
+      name="description"
+      content="Modular Choose Your Own Adventure engine with multiple story packs and replayable timelines."
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/story.css" />
+    <link rel="stylesheet" href="css/timeline.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div id="app-shell">
+      <header class="topbar">
+        <button id="home-button" class="secondary-button hidden">Story Select</button>
+        <div class="brand-mark">VICE CITY // ALT TIMELINES</div>
+        <button id="reset-button" class="ghost-button">Reset</button>
+      </header>
+
+      <main id="screen-root">
+        <section id="story-select-screen" class="screen active"></section>
+        <section id="story-intro-screen" class="screen"></section>
+        <section id="story-screen" class="screen"></section>
+        <section id="timeline-screen" class="screen"></section>
+      </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

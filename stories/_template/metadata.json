@@ -1,0 +1,9 @@
+{
+  "id": "template-story",
+  "title": "Template Story",
+  "subtitle": "A small example for new story packs.",
+  "estimatedMinutes": 5,
+  "setting": "Example World",
+  "version": "1.0",
+  "startingScene": "intro"
+}
