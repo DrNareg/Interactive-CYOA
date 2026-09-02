@@ -622,7 +622,7 @@ function renderStorySelect() {
   const screen = activateScreen('story-select-screen');
   const storyCards = (app.storyMetadata || []).map((storyMeta) => `
     <article class="story-card">
-      <h3>${storyMeta.title || storyMeta.id}</h3>
+      <h3>${getDisplayTitle(storyMeta.title || storyMeta.id)}</h3>
       <p>${storyMeta.subtitle || 'Choose your path and shape the timeline.'}</p>
       <p>${storyMeta.estimatedMinutes || 8}-${Math.max((storyMeta.estimatedMinutes || 8) + 2, 10)} minutes • ${storyMeta.setting || 'Story Pack'}</p>
       <button class="story-button" data-story="${storyMeta.id}">Play</button>
@@ -646,6 +646,10 @@ function renderStorySelect() {
   });
 
   scrollToNewSection(screen);
+}
+
+function getDisplayTitle(title) {
+  return (title || '').replace(/:\s*Alternate Timelines\s*$/i, '').trim();
 }
 
 function updateBrandMark(story = app.currentStory) {
@@ -912,7 +916,7 @@ async function startStory(storyId) {
   app.selectedStoryId = storyId;
   app.currentStory = storyPack.story;
   app.currentStory.metadata = storyPack.metadata;
-  app.currentStory.title = storyPack.metadata.title || app.currentStory.title || 'Untitled Story';
+  app.currentStory.title = getDisplayTitle(storyPack.metadata.title || app.currentStory.title || 'Untitled Story');
   app.currentStory.subtitle = storyPack.metadata.subtitle || app.currentStory.subtitle || '';
   app.currentStory.setting = storyPack.metadata.setting || app.currentStory.setting || 'Story Pack';
   app.currentStory.estimatedMinutes = storyPack.metadata.estimatedMinutes || app.currentStory.estimatedMinutes || 8;
