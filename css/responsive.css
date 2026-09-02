@@ -21,6 +21,10 @@
     margin-left: auto;
   }
 
+  .music-player {
+    min-width: min(390px, 70vw);
+  }
+
   .screen {
     padding: 14px;
   }
@@ -56,6 +60,20 @@
   #home-button {
     flex: 1 1 auto;
     min-height: 42px;
+  }
+
+  .music-player {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .music-status {
+    flex: 1 1 auto;
+  }
+
+  .music-player .music-button {
+    flex: 0 0 auto;
+    min-height: 0;
   }
 
   .story-card {

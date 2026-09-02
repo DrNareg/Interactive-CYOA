@@ -25,8 +25,20 @@ const app = {
     audioReady: false,
     hasUserGesture: false,
     musicEnabled: true,
+    musicIndex: 0,
+    lastVolume: 0.35,
   },
 };
+
+const MUSIC_VOLUME_KEY = 'interactive-cyoa-music-volume-v1';
+const MUSIC_TRACKS = [
+  'GTA Vice City Theme 5mins.m4a',
+  'GTA 3 Theme.m4a',
+  'GTA San Andreas Theme.m4a',
+  'GTA 4 Theme.m4a',
+  'GTA 5 Theme.m4a',
+  'Red Dead Redemption 2 Theme.m4a',
+];
 
 const defaultStory = {
   id: 'vice-city',
@@ -537,13 +549,46 @@ function scrollToNewSection(screenEl) {
   });
 }
 
+function getTrackTitle() {
+  return MUSIC_TRACKS[app.ui.musicIndex].replace(/\.[^.]+$/, '');
+}
+
 function updateMusicToggle(isPlaying) {
   const toggle = document.getElementById('music-toggle');
   if (!toggle) return;
 
-  const enabled = app.ui.musicEnabled;
-  toggle.dataset.playing = enabled && isPlaying ? 'true' : 'false';
-  toggle.textContent = `Music: ${enabled ? 'On' : 'Off'}`;
+  toggle.dataset.playing = app.ui.musicEnabled && isPlaying ? 'true' : 'false';
+  toggle.textContent = `Playing: ${getTrackTitle()}`;
+}
+
+function loadMusicVolume() {
+  const savedVolume = Number.parseFloat(localStorage.getItem(MUSIC_VOLUME_KEY));
+  return Number.isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1 ? savedVolume : 0.35;
+}
+
+function updateMuteButton() {
+  const muteButton = document.getElementById('music-mute');
+  const audio = document.getElementById('bg-music');
+  if (!muteButton || !audio) return;
+
+  muteButton.textContent = audio.muted ? '\u{1F507}' : '\u{1F50A}';
+  muteButton.setAttribute('aria-label', audio.muted ? 'Unmute music' : 'Mute music');
+  muteButton.title = audio.muted ? 'Unmute music' : 'Mute music';
+  muteButton.dataset.muted = audio.muted ? 'true' : 'false';
+}
+
+function setMusicTrack(index, shouldPlay = true) {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+
+  app.ui.musicIndex = (index + MUSIC_TRACKS.length) % MUSIC_TRACKS.length;
+  audio.src = `music/${encodeURIComponent(MUSIC_TRACKS[app.ui.musicIndex]).replace(/%2F/g, '/')}`;
+  audio.load();
+  updateMusicToggle(false);
+
+  if (shouldPlay && app.ui.musicEnabled) {
+    void startBackgroundMusic();
+  }
 }
 
 async function startBackgroundMusic() {
@@ -564,21 +609,26 @@ async function startBackgroundMusic() {
 function setupBackgroundMusic() {
   const audio = document.getElementById('bg-music');
   const toggle = document.getElementById('music-toggle');
-  if (!audio || !toggle) return;
+  const previousButton = document.getElementById('music-previous');
+  const nextButton = document.getElementById('music-next');
+  const muteButton = document.getElementById('music-mute');
+  const volumeSlider = document.getElementById('music-volume');
+  if (!audio || !toggle || !previousButton || !nextButton || !muteButton || !volumeSlider) return;
 
-  audio.volume = 0.35;
-  audio.loop = true;
+  app.ui.lastVolume = loadMusicVolume();
+  audio.volume = app.ui.lastVolume;
+  volumeSlider.value = String(audio.volume);
   audio.preload = 'auto';
   audio.autoplay = true;
+  app.ui.musicIndex = Math.floor(Math.random() * MUSIC_TRACKS.length);
+  setMusicTrack(app.ui.musicIndex, false);
 
+  updateMuteButton();
   updateMusicToggle(app.ui.musicEnabled && !audio.paused);
 
   audio.addEventListener('ended', () => {
     if (!app.ui.musicEnabled) return;
-    audio.currentTime = 0;
-    void audio.play().catch(() => {
-      updateMusicToggle(false);
-    });
+    setMusicTrack(app.ui.musicIndex + 1);
   });
 
   if (app.ui.musicEnabled) {
@@ -603,17 +653,35 @@ function setupBackgroundMusic() {
   document.addEventListener('pointerdown', unlockAudio, { once: false });
   document.addEventListener('keydown', unlockAudio, { once: false });
 
-  toggle.addEventListener('click', async () => {
-    if (!app.ui.musicEnabled) {
-      app.ui.musicEnabled = true;
-      app.ui.hasUserGesture = true;
-      await startBackgroundMusic();
-      return;
-    }
+  previousButton.addEventListener('click', () => {
+    app.ui.hasUserGesture = true;
+    setMusicTrack(app.ui.musicIndex - 1);
+  });
 
-    app.ui.musicEnabled = false;
-    audio.pause();
-    updateMusicToggle(false);
+  nextButton.addEventListener('click', () => {
+    app.ui.hasUserGesture = true;
+    setMusicTrack(app.ui.musicIndex + 1);
+  });
+
+  muteButton.addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    if (!audio.muted && audio.volume === 0) {
+      audio.volume = app.ui.lastVolume || 0.35;
+      volumeSlider.value = String(audio.volume);
+    }
+    updateMuteButton();
+  });
+
+  volumeSlider.addEventListener('input', () => {
+    audio.volume = Number.parseFloat(volumeSlider.value);
+    if (audio.volume > 0) {
+      app.ui.lastVolume = audio.volume;
+      localStorage.setItem(MUSIC_VOLUME_KEY, String(audio.volume));
+    }
+    if (audio.muted && audio.volume > 0) {
+      audio.muted = false;
+      updateMuteButton();
+    }
   });
 }
 
