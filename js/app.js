@@ -658,6 +658,7 @@ function updateBrandMark(story = app.currentStory) {
 
 function renderIntro(story) {
   const screen = activateScreen('story-intro-screen');
+  document.getElementById('home-button').classList.remove('hidden');
   screen.innerHTML = `
     <div class="story-hero">
       <h1>${story.title}</h1>
@@ -735,6 +736,11 @@ function renderStoryScreen(story, sceneId) {
 
   const visibleChoices = (scene.choices || []).filter((choice) => choiceIsVisible(app.currentState, choice));
 
+  if (scene.type === 'ending') {
+    renderEndingScreen(story, scene, { next: scene.id });
+    return;
+  }
+
   const detailEl = document.createElement('div');
   detailEl.innerHTML = `
     <div class="story-hero">
@@ -747,14 +753,16 @@ function renderStoryScreen(story, sceneId) {
         ${(scene.text || []).map((paragraph) => `<p>${paragraph}</p>`).join('')}
       </div>
 
-      <div class="choice-list">
-        ${visibleChoices.map((choice) => `
-          <button class="choice-button" data-choice-id="${choice.id}" data-next="${choice.next || ''}">
-            <span class="choice-label">${choice.label}</span>
-            <span class="choice-next">${choice.next ? 'Continue' : 'Outcome'}</span>
-          </button>
-        `).join('') || '<div class="empty-state">No choices available.</div>'}
-      </div>
+      ${visibleChoices.length ? `
+        <div class="choice-list">
+          ${visibleChoices.map((choice) => `
+            <button class="choice-button" data-choice-id="${choice.id}" data-next="${choice.next || ''}">
+              <span class="choice-label">${choice.label}</span>
+              <span class="choice-next">${choice.next ? 'Continue' : 'Outcome'}</span>
+            </button>
+          `).join('')}
+        </div>
+      ` : '<div class="end-state">The End</div>'}
 
       ${app.currentState.debugMode ? `
         <div class="debug-panel">
@@ -781,7 +789,9 @@ function renderStoryScreen(story, sceneId) {
       addChoiceDiscovery(app.currentState, choiceId);
       applyEffects(app.currentState, choice.effects || {});
 
-      if (nextSceneId && app.currentStory.scenes[nextSceneId]) {
+      if (nextSceneId && app.currentStory.scenes[nextSceneId]?.type === 'ending') {
+        renderEndingScreen(app.currentStory, app.currentStory.scenes[nextSceneId], { next: nextSceneId });
+      } else if (nextSceneId && app.currentStory.scenes[nextSceneId]) {
         renderStoryScreen(app.currentStory, nextSceneId);
       } else {
         renderEndingScreen(app.currentStory, scene, choice);
@@ -920,11 +930,6 @@ async function initializeApp() {
 
   const homeButton = document.getElementById('home-button');
   homeButton.addEventListener('click', showStorySelect);
-  document.getElementById('reset-button').addEventListener('click', () => {
-    localStorage.clear();
-    alert('Progress reset.');
-    showStorySelect();
-  });
 
   app.storyProgress = loadProgress();
   app.registry = await loadStoryRegistry();

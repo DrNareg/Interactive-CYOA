@@ -62,3 +62,92 @@
     padding: 18px;
   }
 }
+
+@media (max-width: 920px) {
+  #story-screen .story-hero,
+  #story-intro-screen .story-hero {
+    text-align: center;
+  }
+
+  #story-screen .scene-title,
+  #story-screen .scene-text,
+  #story-screen .choice-list,
+  #story-intro-screen .summary-card {
+    text-align: center;
+  }
+
+  #story-screen .choice-list {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #story-screen .ending-panel {
+    text-align: center;
+  }
+}
+
+@media (min-width: 921px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 28px;
+    align-items: center;
+  }
+
+  .story-card h3,
+  .story-card p {
+    grid-column: 1;
+  }
+
+  .story-card h3 {
+    grid-row: 1;
+  }
+
+  .story-card p:nth-of-type(1) {
+    grid-row: 2;
+  }
+
+  .story-card p:nth-of-type(2) {
+    grid-row: 3;
+  }
+
+  .story-card .story-button {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    width: 130px;
+  }
+
+  #story-screen .story-hero,
+  #story-intro-screen .story-hero {
+    text-align: center;
+  }
+
+  #story-screen .story-body,
+  #story-intro-screen .story-body {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  #story-screen .scene-title,
+  #story-screen .scene-text {
+    width: 100%;
+    max-width: none;
+    text-align: center;
+  }
+
+  #story-screen .choice-list {
+    width: min(100%, 900px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #story-screen .end-state {
+    width: min(100%, 900px);
+    margin: 24px auto 0;
+    text-align: center;
+  }
+}

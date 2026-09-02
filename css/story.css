@@ -172,3 +172,14 @@
   border-radius: 12px;
   border: 1px solid var(--border);
 }
+
+.end-state {
+  padding: 22px;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  background: rgba(255, 126, 95, 0.08);
+  border: 1px solid rgba(255, 126, 95, 0.35);
+  border-radius: 14px;
+}
