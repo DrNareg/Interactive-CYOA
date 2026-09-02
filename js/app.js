@@ -618,6 +618,7 @@ function setupBackgroundMusic() {
 }
 
 function renderStorySelect() {
+  updateBrandMark();
   const screen = activateScreen('story-select-screen');
   const storyCards = (app.storyMetadata || []).map((storyMeta) => `
     <article class="story-card">
@@ -645,6 +646,14 @@ function renderStorySelect() {
   });
 
   scrollToNewSection(screen);
+}
+
+function updateBrandMark(story = app.currentStory) {
+  const brandMark = document.querySelector('.brand-mark');
+  if (!brandMark) return;
+
+  const storyName = story?.title?.split(':')[0]?.trim();
+  brandMark.textContent = storyName ? `ALT TIMELINES // ${storyName.toUpperCase()}` : 'ALT TIMELINES';
 }
 
 function renderIntro(story) {
@@ -898,6 +907,7 @@ async function startStory(storyId) {
   app.currentStory.setting = storyPack.metadata.setting || app.currentStory.setting || 'Story Pack';
   app.currentStory.estimatedMinutes = storyPack.metadata.estimatedMinutes || app.currentStory.estimatedMinutes || 8;
   app.currentStory.startingScene = storyPack.metadata.startingScene || app.currentStory.startingScene || Object.keys(app.currentStory.scenes)[0];
+  updateBrandMark(app.currentStory);
   app.currentState = appStateFromStory(app.currentStory);
   app.achievements = buildAchievements(app.currentStory);
   app.storyProgress = loadProgress();
