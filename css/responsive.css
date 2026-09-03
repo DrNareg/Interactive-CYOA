@@ -12,8 +12,10 @@
   }
 
   .brand-mark {
+    position: static;
     order: -1;
     flex: 1 1 100%;
+    transform: none;
     text-align: center;
   }
 

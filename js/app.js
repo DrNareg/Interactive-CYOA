@@ -32,7 +32,7 @@ const app = {
 
 const MUSIC_VOLUME_KEY = 'interactive-cyoa-music-volume-v1';
 const MUSIC_TRACKS = [
-  'GTA Vice City Theme 5mins.m4a',
+  'GTA Vice City Theme.m4a',
   'GTA 3 Theme.m4a',
   'GTA San Andreas Theme.m4a',
   'GTA 4 Theme.m4a',
@@ -571,7 +571,8 @@ function updateMuteButton() {
   const audio = document.getElementById('bg-music');
   if (!muteButton || !audio) return;
 
-  muteButton.textContent = audio.muted ? '\u{1F507}' : '\u{1F50A}';
+  const volumeIcon = audio.volume < 1 / 3 ? '\u{1F508}' : audio.volume < 2 / 3 ? '\u{1F509}' : '\u{1F50A}';
+  muteButton.textContent = audio.muted ? '\u{1F507}' : volumeIcon;
   muteButton.setAttribute('aria-label', audio.muted ? 'Unmute music' : 'Mute music');
   muteButton.title = audio.muted ? 'Unmute music' : 'Mute music';
   muteButton.dataset.muted = audio.muted ? 'true' : 'false';
@@ -664,10 +665,17 @@ function setupBackgroundMusic() {
   });
 
   muteButton.addEventListener('click', () => {
-    audio.muted = !audio.muted;
-    if (!audio.muted && audio.volume === 0) {
-      audio.volume = app.ui.lastVolume || 0.35;
+    if (audio.muted) {
+      audio.muted = false;
+      audio.volume = app.ui.lastVolume;
       volumeSlider.value = String(audio.volume);
+    } else {
+      if (audio.volume > 0) {
+        app.ui.lastVolume = audio.volume;
+      }
+      audio.muted = true;
+      audio.volume = 0;
+      volumeSlider.value = '0';
     }
     updateMuteButton();
   });
@@ -677,11 +685,13 @@ function setupBackgroundMusic() {
     if (audio.volume > 0) {
       app.ui.lastVolume = audio.volume;
       localStorage.setItem(MUSIC_VOLUME_KEY, String(audio.volume));
+      if (audio.muted) {
+        audio.muted = false;
+      }
+    } else {
+      audio.muted = true;
     }
-    if (audio.muted && audio.volume > 0) {
-      audio.muted = false;
-      updateMuteButton();
-    }
+    updateMuteButton();
   });
 }
 

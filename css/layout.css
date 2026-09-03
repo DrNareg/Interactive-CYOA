@@ -20,6 +20,7 @@
   justify-content: space-between;
   gap: 14px;
   padding: 18px 22px;
+  position: relative;
   background:
     linear-gradient(90deg, rgba(17, 17, 31, 0.92), rgba(17, 15, 28, 0.7)),
     radial-gradient(circle at 75% 0, rgba(255, 126, 95, 0.15), transparent 40%);
@@ -27,6 +28,9 @@
 }
 
 .brand-mark {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-heading);
   font-size: clamp(0.86rem, 1vw, 1rem);
   letter-spacing: 0.2rem;
@@ -40,6 +44,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
 }
 
 .music-player {
